@@ -12,6 +12,25 @@
             color: #ffffff;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes expandLine {
+            from { width: 0; }
+            to { width: 60px; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInSimple {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* PORTADA */
@@ -21,17 +40,22 @@
         }
 
         h1 {
-            font-size: 3rem; letter-spacing: 12px; margin: 0; font-weight: 900;
+            font-size: 3.5rem; letter-spacing: 15px; margin: 0; font-weight: 900;
             text-transform: uppercase;
+            animation: fadeInDown 1.2s ease-out forwards;
         }
 
         .line {
-            height: 2px; background-color: #fff; margin: 20px auto; width: 60px;
+            height: 2px; background-color: #fff; margin: 20px auto; 
+            animation: expandLine 1.2s ease-in-out 0.5s forwards;
+            width: 0; /* Empieza en 0 para la animación */
         }
 
         p {
-            font-size: 1rem; letter-spacing: 4px; color: #888;
+            font-size: 1rem; letter-spacing: 5px; color: #888;
             text-transform: uppercase; margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 1s forwards;
         }
 
         .btn-tienda {
@@ -40,19 +64,23 @@
             border: 1.5px solid #ffffff;
             color: #ffffff;
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             border-radius: 30px;
             transition: 0.3s;
+            opacity: 0;
+            animation: fadeInSimple 1s ease-out 1.8s forwards;
         }
 
-        .btn-tienda:hover { background: #fff; color: #000; }
+        .btn-tienda:hover { background: #fff; color: #000; transform: scale(1.05); }
 
-        /* SECCIÓN OPCIONES (CATEGORÍAS) */
+        /* SECCIÓN OPCIONES */
         #tienda {
+            min-height: 60vh;
             padding: 80px 20px;
             background-color: #080808;
+            display: flex; flex-direction: column; justify-content: center;
         }
 
         .grid {
@@ -61,19 +89,19 @@
         }
 
         .card {
-            width: 280px; height: 150px; /* Tamaño más discreto */
+            width: 280px; height: 180px;
             background-color: #111;
             border: 1px solid #222;
             display: flex; justify-content: center; align-items: center;
             text-decoration: none; color: #fff;
             border-radius: 10px;
-            font-size: 1rem; letter-spacing: 4px; text-transform: uppercase;
+            font-size: 1.1rem; letter-spacing: 4px; text-transform: uppercase;
             transition: 0.4s;
         }
 
         .card:hover { border-color: #fff; transform: translateY(-5px); }
 
-        /* SECCIÓN PRODUCTO (LA SUDADERA) */
+        /* SECCIÓN PRODUCTO */
         #sudaderas {
             padding: 100px 20px;
             background-color: #050505;
@@ -92,7 +120,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .fotos-grid img {
@@ -103,16 +131,14 @@
         }
 
         .nombre-prod {
-            font-size: 1.4rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-weight: bold;
+            font-size: 1.5rem; letter-spacing: 5px;
+            text-transform: uppercase; font-weight: bold;
         }
 
         @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
+            h1 { font-size: 2.2rem; letter-spacing: 8px; }
             .fotos-grid { grid-template-columns: 1fr; }
-            .card { width: 100%; height: 100px; }
+            .card { width: 100%; height: 120px; }
         }
     </style>
 </head>
