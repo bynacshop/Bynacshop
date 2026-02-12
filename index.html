@@ -12,36 +12,40 @@
             color: #ffffff;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             text-align: center;
+            overflow-x: hidden;
         }
 
-        /* PORTADA - Tamaño Ajustado (Más elegante) */
+        /* PORTADA - Tamaño Elegante */
         .hero {
             height: 100vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         h1 {
-            font-size: 3.5rem; /* Antes 5rem - Ahora más equilibrado */
-            letter-spacing: 15px; 
-            margin: 0; 
+            font-size: 3.5rem;
+            letter-spacing: 15px;
+            margin: 0;
             font-weight: 900;
             text-transform: uppercase;
             animation: fadeInDown 1.5s ease-out forwards;
         }
 
         .line {
-            height: 2px; /* Más fina */
-            background-color: #fff; 
-            margin: 20px auto; 
+            height: 2px;
+            background-color: #fff;
+            margin: 20px auto;
             width: 0;
             animation: expandLine 1.5s ease-in-out 0.5s forwards;
         }
 
         p {
-            font-size: 1.1rem; /* Antes 1.4rem - Más sutil */
-            letter-spacing: 5px; 
+            font-size: 1.1rem;
+            letter-spacing: 5px;
             color: #888;
-            text-transform: uppercase; 
+            text-transform: uppercase;
             margin-bottom: 40px;
             opacity: 0;
             animation: fadeInUp 1.5s ease-out 1s forwards;
@@ -49,7 +53,7 @@
 
         .btn-tienda {
             display: inline-block;
-            padding: 15px 45px; /* Más compacto */
+            padding: 15px 45px;
             border: 1.5px solid #ffffff;
             color: #ffffff;
             text-decoration: none;
@@ -70,36 +74,60 @@
             transform: scale(1.05);
         }
 
-        /* SECCIÓN DE CATEGORÍAS - Tamaño Proporcional */
+        /* SECCIÓN DE OPCIONES (CATEGORÍAS) */
         #tienda-opciones {
             min-height: 100vh;
+            padding: 80px 20px;
+            background-color: #080808;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #0a0a0a;
-            padding: 50px 20px;
         }
 
         .titulo-seccion {
-            font-size: 1.8rem; /* Tamaño más real */
+            font-size: 1.8rem;
             letter-spacing: 10px;
             text-transform: uppercase;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             font-weight: 700;
         }
 
         .categorias-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            max-width: 900px; /* Un poco más estrecho */
+            gap: 25px;
+            max-width: 900px;
             width: 100%;
         }
 
         .categoria-card {
             position: relative;
-            height: 400px; /* Reducido de 500px */
+            height: 400px;
             background-color: #111;
             border: 1px solid #222;
             display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            overflow: hidden;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+        }
+
+        .categoria-card:hover {
+            border-color: #fff;
+            transform: translateY(-5px);
+        }
+
+        .categoria-card h2 {
+            font-size: 1.4rem;
+            letter-spacing: 6px;
+            z-index: 2;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        /* ANIMACIONES */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); }
