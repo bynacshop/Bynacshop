@@ -12,78 +12,48 @@
             color: #ffffff;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             text-align: center;
+            overflow-x: hidden;
         }
 
-        /* --- ANIMACIÓN SEGURA --- 
-           Usamos solo transform para que si falla, el elemento ya esté ahí */
-        @keyframes entradaSuave {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* --- ANIMACIONES --- */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes expandLine { from { width: 0; } to { width: 60px; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInSimple { from { opacity: 0; } to { opacity: 1; } }
 
         /* PORTADA */
-        .hero {
-            height: 100vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-        }
-
-        h1 { 
-            font-size: 3.5rem; letter-spacing: 15px; text-transform: uppercase; margin: 0;
-            animation: entradaSuave 1s ease-out forwards;
-        }
-
-        .line { 
-            height: 2px; background-color: #fff; width: 60px; margin: 20px auto;
-            opacity: 0;
-            animation: entradaSuave 1s ease-out 0.5s forwards;
-        }
-
-        .tagline { 
-            font-size: 1rem; letter-spacing: 5px; color: #888; text-transform: uppercase;
-            opacity: 0;
-            animation: entradaSuave 1s ease-out 1s forwards;
-        }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        h1 { font-size: 3.5rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; animation: fadeInDown 1.2s ease-out forwards; }
+        .line { height: 2px; background-color: #fff; margin: 20px auto; width: 0; animation: expandLine 1.2s ease-in-out 0.5s forwards; }
+        .tagline { font-size: 1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; opacity: 0; animation: fadeInUp 1.2s ease-out 1s forwards; }
         
-        /* BOTÓN TIENDA - APARECE AL FINAL */
         .btn-tienda {
-            margin-top: 40px;
-            display: inline-block;
-            padding: 15px 45px; border: 1.5px solid #fff; color: #fff;
+            display: inline-block; padding: 15px 45px; border: 1.5px solid #ffffff; color: #ffffff;
             text-decoration: none; font-size: 0.9rem; border-radius: 30px; text-transform: uppercase;
-            opacity: 0;
-            animation: entradaSuave 1s ease-out 1.8s forwards;
-            transition: background 0.3s, color 0.3s;
+            opacity: 0; animation: fadeInSimple 1s ease-out 2.2s forwards; transition: 0.3s;
         }
         .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* CATEGORÍAS (TAMAÑO GRANDE) */
-        #tienda { padding: 100px 20px; background: #080808; }
-        .grid { 
-            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; 
-            max-width: 1000px; margin: 0 auto;
-        }
-        .card { 
-            width: 300px; height: 180px; background: #111; border: 1px solid #222;
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: #fff; border-radius: 10px; 
-            font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase;
-            transition: 0.3s;
+        /* CATEGORÍAS */
+        #tienda { padding: 100px 20px; background-color: #080808; }
+        .grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
+        .card {
+            width: 300px; height: 180px; background-color: #111; border: 1px solid #222;
+            display: flex; justify-content: center; align-items: center;
+            text-decoration: none; color: #fff; border-radius: 10px;
+            font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase; transition: 0.4s;
         }
         .card:hover { border-color: #fff; transform: translateY(-5px); }
 
-        /* PRODUCTO (FOTOS PEQUEÑAS Y ELEGANTES) */
-        #sudaderas { padding: 80px 20px; }
-        .producto-card { 
-            max-width: 550px; margin: 0 auto; background: #0a0a0a; 
-            padding: 30px; border-radius: 15px; border: 1px solid #1a1a1a;
-        }
+        /* SECCIÓN PRODUCTOS */
+        #productos { padding: 80px 20px; background-color: #050505; }
+        .producto-card { max-width: 550px; margin: 0 auto 50px auto; background: #0a0a0a; padding: 30px; border-radius: 15px; border: 1px solid #1a1a1a; }
         .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .fotos-grid img { 
-            width: 100%; height: 320px; object-fit: cover; 
-            border-radius: 8px; cursor: pointer; 
-        }
+        .fotos-grid img { width: 100%; height: 320px; object-fit: cover; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .fotos-grid img:hover { opacity: 0.8; }
+        .nombre-prod { margin-top: 25px; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; }
 
-        /* ZOOM DE IMAGEN */
+        /* ZOOM (MODAL) */
         .modal {
             display: none; position: fixed; z-index: 1000; top: 0; left: 0;
             width: 100%; height: 100%; background: rgba(0,0,0,0.9);
@@ -93,7 +63,7 @@
         .modal img { max-width: 90%; max-height: 90%; border-radius: 5px; }
 
         @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; letter-spacing: 8px; }
+            h1 { font-size: 2.2rem; letter-spacing: 8px; }
             .card { width: 100%; height: 140px; }
             .fotos-grid { grid-template-columns: 1fr; }
         }
@@ -111,14 +81,35 @@
     <section id="tienda">
         <div class="grid">
             <a href="#" class="card">Camisetas</a>
-            <a href="#sudaderas" class="card">Sudaderas</a>
+            <a href="#productos" class="card">Sudaderas</a>
         </div>
     </section>
 
-    <section id="sudaderas">
-        <div class="producto-card">
+    <section id="productos">
+        
+        <div class="producto-card" id="negra">
             <div class="fotos-grid">
-                <a href="#view1"><img src="sudadera_frente.jpg" alt="Frente"></a>
-                <a href="#view2"><img src="sudadera_espalda.jpg" alt="Espalda"></a>
+                <a href="#view_negra_1"><img src="sudadera_frente.jpg" alt="Negra Frente"></a>
+                <a href="#view_negra_2"><img src="sudadera_espalda.jpg" alt="Negra Espalda"></a>
             </div>
-            <p style="margin-top: 25px; letter-spacing: 3px; font-weight: bold;">SUDADERA NEGRA BY
+            <p class="nombre-prod">SUDADERA NEGRA BYNAC</p>
+        </div>
+
+        <div class="producto-card" id="blanca">
+            <div class="fotos-grid">
+                <a href="#view_blanca_1"><img src="sudadera_blan_delante.jpg" alt="Blanca Frente"></a>
+                <a href="#view_blanca_2"><img src="sudadera_blan_detras.jpg" alt="Blanca Espalda"></a>
+            </div>
+            <p class="nombre-prod">SUDADERA BLANCA BYNAC</p>
+        </div>
+
+    </section>
+
+    <div id="view_negra_1" class="modal"><a href="#negra"><img src="sudadera_frente.jpg"></a></div>
+    <div id="view_negra_2" class="modal"><a href="#negra"><img src="sudadera_espalda.jpg"></a></div>
+
+    <div id="view_blanca_1" class="modal"><a href="#blanca"><img src="sudadera_blan_delante.jpg"></a></div>
+    <div id="view_blanca_2" class="modal"><a href="#blanca"><img src="sudadera_blan_detras.jpg"></a></div>
+
+</body>
+</html>
