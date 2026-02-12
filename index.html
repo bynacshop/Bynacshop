@@ -14,35 +14,68 @@
             text-align: center;
         }
 
-        /* PORTADA Y SECCIONES */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        h1 { font-size: 3.5rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; }
+        /* PORTADA */
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        h1 { font-size: 3rem; letter-spacing: 12px; text-transform: uppercase; margin: 0; }
         .line { height: 2px; background-color: #fff; margin: 20px auto; width: 60px; }
-        p { font-size: 1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; }
+        p { font-size: 0.9rem; letter-spacing: 4px; color: #888; text-transform: uppercase; margin-bottom: 40px; }
         
         .btn-tienda {
-            padding: 15px 45px; border: 1.5px solid #fff; color: #fff;
-            text-decoration: none; font-size: 0.9rem; border-radius: 30px; text-transform: uppercase;
+            padding: 12px 35px; border: 1.5px solid #fff; color: #fff;
+            text-decoration: none; font-size: 0.8rem; border-radius: 30px; text-transform: uppercase;
         }
 
         /* CATEGORÍAS */
-        #tienda { padding: 60px 20px; background: #080808; }
-        .grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        #tienda { padding: 50px 20px; background: #080808; }
+        .grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .card { 
-            width: 220px; height: 80px; background: #111; border: 1px solid #222;
+            width: 200px; height: 60px; background: #111; border: 1px solid #222;
             display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: #fff; border-radius: 8px; font-size: 0.8rem; letter-spacing: 2px;
+            text-decoration: none; color: #fff; border-radius: 6px; font-size: 0.7rem; letter-spacing: 2px;
         }
 
-        /* PRODUCTO Y FOTOS PEQUEÑAS */
+        /* PRODUCTO - FOTOS PEQUEÑAS */
         #sudaderas { padding: 60px 20px; }
-        .producto-card { max-width: 600px; margin: 0 auto; background: #0a0a0a; padding: 20px; border-radius: 10px; }
-        .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .producto-card { max-width: 500px; margin: 0 auto; background: #0a0a0a; padding: 20px; border-radius: 10px; border: 1px solid #111; }
+        .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         
         .fotos-grid img {
-            width: 100%; height: 300px; object-fit: cover;
-            border-radius: 5px; cursor: pointer; transition: 0.3s;
+            width: 100%; height: 280px; object-fit: cover;
+            border-radius: 4px; transition: 0.3s;
         }
-        .fotos-grid img:hover { opacity: 0.8; }
 
-        /* EFECTO AMPLIAR (
+        .nombre-prod { margin-top: 15px; font-size: 1rem; letter-spacing: 3px; color: #aaa; }
+
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>BYNAC</h1>
+        <div class="line"></div>
+        <p>Beyond Norms and Conformity</p>
+        <a href="#tienda" class="btn-tienda">Tienda</a>
+    </section>
+
+    <section id="tienda">
+        <div class="grid">
+            <a href="#" class="card">Camisetas</a>
+            <a href="#sudaderas" class="card">Sudaderas</a>
+        </div>
+    </section>
+
+    <section id="sudaderas">
+        <div class="producto-card">
+            <div class="fotos-grid">
+                <img src="sudadera_frente.jpg" alt="Frente">
+                <img src="sudadera_espalda.jpg" alt="Espalda">
+            </div>
+            <div class="nombre-prod">SUDADERA NEGRA BYNAC</div>
+        </div>
+    </section>
+
+</body>
+</html>
