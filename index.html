@@ -1,100 +1,163 @@
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BYNAC | Beyond Norms and Conformity</title>
     <style>
+        html { scroll-behavior: smooth; }
         body {
             margin: 0; padding: 0;
             background-color: #050505;
             color: #ffffff;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            text-align: center;
+        }
+
+        /* PORTADA PRINCIPAL */
+        .hero {
+            height: 100vh;
             display: flex; justify-content: center; align-items: center;
-            height: 100vh; text-align: center;
             overflow: hidden;
         }
 
-        /* 1. Animación del Título (Cae desde arriba) */
         h1 {
-            font-size: 3.5rem; letter-spacing: 15px; margin-bottom: 5px; font-weight: 900;
+            font-size: 5rem; letter-spacing: 20px; margin-bottom: 5px; font-weight: 900;
             text-transform: uppercase;
             animation: fadeInDown 1.5s ease-out forwards;
         }
 
-        /* 2. Animación de la Línea (Se expande desde el centro) */
         .line {
-            height: 2px; background-color: #fff;
-            margin: 20px auto;
-            width: 0; /* Empieza en 0 */
+            height: 3px; background-color: #fff; margin: 25px auto; width: 0;
             animation: expandLine 1.5s ease-in-out 0.5s forwards;
         }
 
-        /* 3. Animación del Eslogan (Sube desde abajo) */
         p {
-            font-size: 1rem; letter-spacing: 4px; color: #888;
-            text-transform: uppercase; margin-bottom: 40px;
+            font-size: 1.4rem; letter-spacing: 6px; color: #888;
+            text-transform: uppercase; margin-bottom: 50px;
             opacity: 0;
             animation: fadeInUp 1.5s ease-out 1s forwards;
         }
 
-        /* 4. Botón Redondeado (Aparece al final de todo) */
         .btn-tienda {
             display: inline-block;
-            padding: 15px 45px;
-            border: 1px solid #ffffff;
+            padding: 20px 60px;
+            border: 2px solid #ffffff;
             color: #ffffff;
             text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
+            font-size: 1.1rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            border-radius: 30px; /* Redondeado */
+            border-radius: 40px;
             transition: all 0.4s ease;
             background: transparent;
             opacity: 0;
             animation: fadeInSimple 1s ease-out 2.5s forwards;
+            cursor: pointer;
         }
 
         .btn-tienda:hover {
             background-color: #ffffff;
             color: #000000;
-            box-shadow: 0 0 20px rgba(255,255,255,0.4);
-            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255,255,255,0.5);
+            transform: scale(1.1);
         }
+
+        /* SECCIÓN DE CATÁLOGO */
+        #catalogo {
+            min-height: 100vh;
+            padding: 100px 20px;
+            background-color: #0a0a0a; /* Un gris muy oscuro para diferenciar */
+        }
+
+        .titulo-catalogo {
+            font-size: 2.5rem;
+            letter-spacing: 12px;
+            margin-bottom: 80px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        /* Cuadrícula de productos */
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .producto-card {
+            background-color: #111;
+            border: 1px solid #222;
+            padding: 20px;
+            border-radius: 15px; /* Esquinas suavizadas para el catálogo */
+            transition: transform 0.3s ease;
+        }
+
+        .producto-card:hover {
+            transform: translateY(-10px);
+            border-color: #444;
+        }
+
+        .foto-placeholder {
+            width: 100%;
+            height: 350px;
+            background-color: #1a1a1a;
+            margin-bottom: 20px;
+            display: flex; justify-content: center; align-items: center;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .nombre-prod { font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 10px; }
+        .precio-prod { color: #888; font-size: 1rem; }
 
         /* KEYFRAMES */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes expandLine {
-            from { width: 0; }
-            to { width: 50px; }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInSimple {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes expandLine { from { width: 0; } to { width: 80px; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInSimple { from { opacity: 0; } to { opacity: 1; } }
 
         @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; letter-spacing: 8px; }
-            p { font-size: 0.7rem; }
+            h1 { font-size: 2.8rem; letter-spacing: 10px; }
+            p { font-size: 0.9rem; }
+            .btn-tienda { padding: 15px 40px; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>BYNAC</h1>
-        <div class="line"></div>
-        <p>Beyond Norms and Conformity</p>
-        <a href="#" class="btn-tienda">Tienda</a>
-    </div>
+
+    <section class="hero">
+        <div class="container">
+            <h1>BYNAC</h1>
+            <div class="line"></div>
+            <p>Beyond Norms and Conformity</p>
+            <a href="#catalogo" class="btn-tienda">Tienda</a>
+        </div>
+    </section>
+
+    <section id="catalogo">
+        <h2 class="titulo-catalogo">Colección</h2>
+        <div class="productos-grid">
+            <div class="producto-card">
+                <div class="foto-placeholder">IMAGEN PRÓXIMAMENTE</div>
+                <div class="nombre-prod">BYNAC CLASSIC TEE</div>
+                <div class="precio-prod">00.00€</div>
+            </div>
+            <div class="producto-card">
+                <div class="foto-placeholder">IMAGEN PRÓXIMAMENTE</div>
+                <div class="nombre-prod">BEYOND HOODIE</div>
+                <div class="precio-prod">00.00€</div>
+            </div>
+            <div class="producto-card">
+                <div class="foto-placeholder">IMAGEN PRÓXIMAMENTE</div>
+                <div class="nombre-prod">NORMS OVERSIZE</div>
+                <div class="precio-prod">00.00€</div>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
