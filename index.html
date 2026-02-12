@@ -14,15 +14,14 @@
             text-align: center;
         }
 
-        /* PORTADA PRINCIPAL */
+        /* PORTADA - Mantenemos el tamaño grande y animaciones */
         .hero {
             height: 100vh;
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
         h1 {
-            font-size: 5rem; letter-spacing: 20px; margin-bottom: 5px; font-weight: 900;
+            font-size: 5rem; letter-spacing: 20px; margin: 0; font-weight: 900;
             text-transform: uppercase;
             animation: fadeInDown 1.5s ease-out forwards;
         }
@@ -53,10 +52,60 @@
             background: transparent;
             opacity: 0;
             animation: fadeInSimple 1s ease-out 2.5s forwards;
-            cursor: pointer;
         }
 
-        .btn-tienda:hover {
-            background-color: #ffffff;
-            color: #000000;
-            box-shadow: 0 0 30px rgba(255,25
+        /* CATÁLOGO */
+        #catalogo {
+            min-height: 100vh;
+            padding: 100px 20px;
+            background-color: #0a0a0a;
+        }
+
+        .producto-card {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #111;
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid #222;
+        }
+
+        .producto-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            background: #1a1a1a; /* Esto evita que se vea negro si no hay foto */
+            min-height: 300px;
+        }
+
+        /* ANIMACIONES (Sin simplificar) */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes expandLine { from { width: 0; } to { width: 80px; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInSimple { from { opacity: 0; } to { opacity: 1; } }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; letter-spacing: 10px; }
+            p { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>BYNAC</h1>
+        <div class="line"></div>
+        <p>Beyond Norms and Conformity</p>
+        <a href="#catalogo" class="btn-tienda">Tienda</a>
+    </section>
+
+    <section id="catalogo">
+        <div class="producto-card">
+            <img src="sudadera.jpg" alt="Cargando sudadera...">
+            <h2 style="letter-spacing: 3px; margin-top: 20px;">SUDADERA BYNAC</h2>
+        </div>
+    </section>
+
+</body>
+</html>
