@@ -14,98 +14,92 @@
             text-align: center;
         }
 
-        /* PORTADA - Mantenemos el tamaño grande y animaciones */
+        /* PORTADA - Tamaño Ajustado (Más elegante) */
         .hero {
             height: 100vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
         h1 {
-            font-size: 5rem; letter-spacing: 20px; margin: 0; font-weight: 900;
+            font-size: 3.5rem; /* Antes 5rem - Ahora más equilibrado */
+            letter-spacing: 15px; 
+            margin: 0; 
+            font-weight: 900;
             text-transform: uppercase;
             animation: fadeInDown 1.5s ease-out forwards;
         }
 
         .line {
-            height: 3px; background-color: #fff; margin: 25px auto; width: 0;
+            height: 2px; /* Más fina */
+            background-color: #fff; 
+            margin: 20px auto; 
+            width: 0;
             animation: expandLine 1.5s ease-in-out 0.5s forwards;
         }
 
         p {
-            font-size: 1.4rem; letter-spacing: 6px; color: #888;
-            text-transform: uppercase; margin-bottom: 50px;
+            font-size: 1.1rem; /* Antes 1.4rem - Más sutil */
+            letter-spacing: 5px; 
+            color: #888;
+            text-transform: uppercase; 
+            margin-bottom: 40px;
             opacity: 0;
             animation: fadeInUp 1.5s ease-out 1s forwards;
         }
 
         .btn-tienda {
             display: inline-block;
-            padding: 20px 60px;
-            border: 2px solid #ffffff;
+            padding: 15px 45px; /* Más compacto */
+            border: 1.5px solid #ffffff;
             color: #ffffff;
             text-decoration: none;
-            font-size: 1.1rem;
-            letter-spacing: 4px;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            border-radius: 40px;
+            border-radius: 30px;
             transition: all 0.4s ease;
             background: transparent;
             opacity: 0;
-            animation: fadeInSimple 1s ease-out 2.5s forwards;
+            animation: fadeInSimple 1s ease-out 2s forwards;
+            cursor: pointer;
         }
 
-        /* CATÁLOGO */
-        #catalogo {
+        .btn-tienda:hover {
+            background-color: #ffffff;
+            color: #000000;
+            transform: scale(1.05);
+        }
+
+        /* SECCIÓN DE CATEGORÍAS - Tamaño Proporcional */
+        #tienda-opciones {
             min-height: 100vh;
-            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             background-color: #0a0a0a;
+            padding: 50px 20px;
         }
 
-        .producto-card {
-            max-width: 400px;
-            margin: 0 auto;
-            background: #111;
-            padding: 20px;
-            border-radius: 20px;
-            border: 1px solid #222;
+        .titulo-seccion {
+            font-size: 1.8rem; /* Tamaño más real */
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            font-weight: 700;
         }
 
-        .producto-card img {
+        .categorias-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 900px; /* Un poco más estrecho */
             width: 100%;
-            height: auto;
-            border-radius: 10px;
-            display: block;
-            background: #1a1a1a; /* Esto evita que se vea negro si no hay foto */
-            min-height: 300px;
         }
 
-        /* ANIMACIONES (Sin simplificar) */
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes expandLine { from { width: 0; } to { width: 80px; } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInSimple { from { opacity: 0; } to { opacity: 1; } }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; letter-spacing: 10px; }
-            p { font-size: 0.8rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <section class="hero">
-        <h1>BYNAC</h1>
-        <div class="line"></div>
-        <p>Beyond Norms and Conformity</p>
-        <a href="#catalogo" class="btn-tienda">Tienda</a>
-    </section>
-
-    <section id="catalogo">
-        <div class="producto-card">
-            <img src="sudadera.jpg" alt="Cargando sudadera...">
-            <h2 style="letter-spacing: 3px; margin-top: 20px;">SUDADERA BYNAC</h2>
-        </div>
-    </section>
-
-</body>
-</html>
+        .categoria-card {
+            position: relative;
+            height: 400px; /* Reducido de 500px */
+            background-color: #111;
+            border: 1px solid #222;
+            display: flex;
