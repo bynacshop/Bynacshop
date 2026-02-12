@@ -12,43 +12,73 @@
             color: #ffffff;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             text-align: center;
+            overflow-x: hidden;
         }
+
+        /* --- ANIMACIONES --- */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes expandLine { from { width: 0; } to { width: 60px; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         /* PORTADA */
-        .hero {
-            height: 100vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        h1 { 
+            font-size: 3.5rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; 
+            animation: fadeInDown 1.2s ease-out forwards;
         }
-        h1 { font-size: 3rem; letter-spacing: 12px; text-transform: uppercase; margin: 0; }
-        .line { height: 2px; background-color: #fff; margin: 20px auto; width: 60px; }
-        p { font-size: 0.9rem; letter-spacing: 4px; color: #888; text-transform: uppercase; margin-bottom: 40px; }
+        .line { 
+            height: 2px; background-color: #fff; margin: 20px auto; width: 0;
+            animation: expandLine 1.2s ease-in-out 0.5s forwards;
+        }
+        p.tagline { 
+            font-size: 1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px;
+            opacity: 0; animation: fadeInUp 1.2s ease-out 1s forwards;
+        }
         
         .btn-tienda {
-            padding: 12px 35px; border: 1.5px solid #fff; color: #fff;
-            text-decoration: none; font-size: 0.8rem; border-radius: 30px; text-transform: uppercase;
+            padding: 15px 45px; border: 1.5px solid #fff; color: #fff;
+            text-decoration: none; font-size: 0.9rem; border-radius: 30px; text-transform: uppercase;
+            transition: 0.3s;
         }
+        .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* CATEGORÍAS */
-        #tienda { padding: 50px 20px; background: #080808; }
-        .grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        /* CATEGORÍAS (MÁS GRANDES) */
+        #tienda { padding: 100px 20px; background: #080808; }
+        .grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .card { 
-            width: 200px; height: 60px; background: #111; border: 1px solid #222;
+            width: 300px; height: 180px; background: #111; border: 1px solid #222;
             display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: #fff; border-radius: 6px; font-size: 0.7rem; letter-spacing: 2px;
+            text-decoration: none; color: #fff; border-radius: 10px; 
+            font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase;
+            transition: 0.4s;
         }
+        .card:hover { border-color: #fff; transform: translateY(-5px); }
 
-        /* PRODUCTO - FOTOS PEQUEÑAS */
-        #sudaderas { padding: 60px 20px; }
-        .producto-card { max-width: 500px; margin: 0 auto; background: #0a0a0a; padding: 20px; border-radius: 10px; border: 1px solid #111; }
-        .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        /* PRODUCTO (FOTOS PEQUEÑAS) */
+        #sudaderas { padding: 80px 20px; }
+        .producto-card { max-width: 550px; margin: 0 auto; background: #0a0a0a; padding: 30px; border-radius: 15px; }
+        .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         
         .fotos-grid img {
-            width: 100%; height: 280px; object-fit: cover;
-            border-radius: 4px; transition: 0.3s;
+            width: 100%; height: 320px; object-fit: cover;
+            border-radius: 8px; cursor: pointer; transition: 0.3s;
         }
+        .fotos-grid img:hover { filter: brightness(1.2); }
 
-        .nombre-prod { margin-top: 15px; font-size: 1rem; letter-spacing: 3px; color: #aaa; }
+        /* MODAL PARA AMPLIAR FOTO */
+        .modal {
+            display: none; position: fixed; z-index: 1000; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.9);
+            justify-content: center; align-items: center; cursor: zoom-out;
+        }
+        .modal:target { display: flex; }
+        .modal img { max-width: 90%; max-height: 90%; border-radius: 10px; border: 1px solid #333; }
 
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; letter-spacing: 8px; }
+            .card { width: 100%; height: 120px; }
+            .fotos-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -56,7 +86,7 @@
     <section class="hero">
         <h1>BYNAC</h1>
         <div class="line"></div>
-        <p>Beyond Norms and Conformity</p>
+        <p class="tagline">Beyond Norms and Conformity</p>
         <a href="#tienda" class="btn-tienda">Tienda</a>
     </section>
 
@@ -70,12 +100,19 @@
     <section id="sudaderas">
         <div class="producto-card">
             <div class="fotos-grid">
-                <img src="sudadera_frente.jpg" alt="Frente">
-                <img src="sudadera_espalda.jpg" alt="Espalda">
+                <a href="#view1"><img src="sudadera_frente.jpg" alt="Frente"></a>
+                <a href="#view2"><img src="sudadera_espalda.jpg" alt="Espalda"></a>
             </div>
-            <div class="nombre-prod">SUDADERA NEGRA BYNAC</div>
+            <p style="margin-top: 25px; letter-spacing: 3px; font-weight: bold;">SUDADERA NEGRA BYNAC</p>
         </div>
     </section>
+
+    <div id="view1" class="modal">
+        <a href="#sudaderas"><img src="sudadera_frente.jpg"></a>
+    </div>
+    <div id="view2" class="modal">
+        <a href="#sudaderas"><img src="sudadera_espalda.jpg"></a>
+    </div>
 
 </body>
 </html>
