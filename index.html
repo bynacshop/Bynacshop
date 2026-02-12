@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -15,47 +15,40 @@
             overflow: hidden;
         }
 
-        /* 1. Título más grande y animado */
+        /* 1. Animación del Título (Cae desde arriba) */
         h1 {
-            font-size: 5rem; /* Aumentado de 3.5rem */
-            letter-spacing: 20px; 
-            margin-bottom: 5px; 
-            font-weight: 900;
+            font-size: 3.5rem; letter-spacing: 15px; margin-bottom: 5px; font-weight: 900;
             text-transform: uppercase;
             animation: fadeInDown 1.5s ease-out forwards;
         }
 
-        /* 2. Línea central */
+        /* 2. Animación de la Línea (Se expande desde el centro) */
         .line {
-            height: 3px; /* Un poco más gruesa */
-            background-color: #fff;
-            margin: 25px auto;
-            width: 0;
+            height: 2px; background-color: #fff;
+            margin: 20px auto;
+            width: 0; /* Empieza en 0 */
             animation: expandLine 1.5s ease-in-out 0.5s forwards;
         }
 
-        /* 3. Eslogan más grande */
+        /* 3. Animación del Eslogan (Sube desde abajo) */
         p {
-            font-size: 1.4rem; /* Aumentado de 1rem */
-            letter-spacing: 6px; 
-            color: #888;
-            text-transform: uppercase; 
-            margin-bottom: 50px;
+            font-size: 1rem; letter-spacing: 4px; color: #888;
+            text-transform: uppercase; margin-bottom: 40px;
             opacity: 0;
             animation: fadeInUp 1.5s ease-out 1s forwards;
         }
 
-        /* 4. Botón Redondeado y más Grande */
+        /* 4. Botón Redondeado (Aparece al final de todo) */
         .btn-tienda {
             display: inline-block;
-            padding: 20px 60px; /* Más padding para hacerlo más grande */
-            border: 2px solid #ffffff; /* Borde un poco más grueso */
+            padding: 15px 45px;
+            border: 1px solid #ffffff;
             color: #ffffff;
             text-decoration: none;
-            font-size: 1.1rem; /* Letra más grande */
-            letter-spacing: 4px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            border-radius: 40px; /* Más redondeado para mantener la proporción */
+            border-radius: 30px; /* Redondeado */
             transition: all 0.4s ease;
             background: transparent;
             opacity: 0;
@@ -65,23 +58,23 @@
         .btn-tienda:hover {
             background-color: #ffffff;
             color: #000000;
-            box-shadow: 0 0 30px rgba(255,255,255,0.5);
-            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255,255,255,0.4);
+            transform: scale(1.05);
         }
 
-        /* KEYFRAMES (Sin cambios, solo fluyen con el nuevo tamaño) */
+        /* KEYFRAMES */
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-40px); }
+            from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes expandLine {
             from { width: 0; }
-            to { width: 80px; } /* Línea más larga acorde al tamaño */
+            to { width: 50px; }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -90,11 +83,9 @@
             to { opacity: 1; }
         }
 
-        /* Ajuste para móviles para que no se corte */
         @media (max-width: 600px) {
-            h1 { font-size: 2.8rem; letter-spacing: 10px; }
-            p { font-size: 0.9rem; letter-spacing: 3px; }
-            .btn-tienda { padding: 15px 40px; font-size: 0.9rem; }
+            h1 { font-size: 2.2rem; letter-spacing: 8px; }
+            p { font-size: 0.7rem; }
         }
     </style>
 </head>
