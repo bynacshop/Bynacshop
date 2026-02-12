@@ -3,131 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BYNAC | Beyond Norms and Conformity</title>
+    <title>BYNAC</title>
     <style>
         html { scroll-behavior: smooth; }
         body {
             margin: 0; padding: 0;
             background-color: #050505;
             color: #ffffff;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
-            overflow-x: hidden;
         }
 
-        /* PORTADA - Tamaño Elegante */
+        /* PORTADA */
         .hero {
             height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
         h1 {
-            font-size: 3.5rem;
-            letter-spacing: 15px;
-            margin: 0;
-            font-weight: 900;
+            font-size: 3rem; letter-spacing: 12px; margin: 0;
             text-transform: uppercase;
-            animation: fadeInDown 1.5s ease-out forwards;
         }
 
         .line {
-            height: 2px;
-            background-color: #fff;
-            margin: 20px auto;
-            width: 0;
-            animation: expandLine 1.5s ease-in-out 0.5s forwards;
+            height: 2px; background-color: #fff; width: 60px; margin: 20px auto;
         }
 
         p {
-            font-size: 1.1rem;
-            letter-spacing: 5px;
-            color: #888;
-            text-transform: uppercase;
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeInUp 1.5s ease-out 1s forwards;
+            font-size: 1rem; letter-spacing: 4px; color: #888;
+            text-transform: uppercase; margin-bottom: 40px;
         }
 
         .btn-tienda {
             display: inline-block;
-            padding: 15px 45px;
-            border: 1.5px solid #ffffff;
+            padding: 15px 40px;
+            border: 1px solid #ffffff;
             color: #ffffff;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             border-radius: 30px;
-            transition: all 0.4s ease;
-            background: transparent;
-            opacity: 0;
-            animation: fadeInSimple 1s ease-out 2s forwards;
-            cursor: pointer;
         }
 
-        .btn-tienda:hover {
-            background-color: #ffffff;
-            color: #000000;
-            transform: scale(1.05);
+        /* CATEGORÍAS */
+        #tienda {
+            padding: 100px 20px;
+            background-color: #0a0a0a;
         }
 
-        /* SECCIÓN DE OPCIONES (CATEGORÍAS) */
-        #tienda-opciones {
-            min-height: 100vh;
-            padding: 80px 20px;
-            background-color: #080808;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        .grid {
+            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+            max-width: 1000px; margin: 0 auto;
         }
 
-        .titulo-seccion {
-            font-size: 1.8rem;
-            letter-spacing: 10px;
-            text-transform: uppercase;
-            margin-bottom: 60px;
-            font-weight: 700;
-        }
-
-        .categorias-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            max-width: 900px;
-            width: 100%;
-        }
-
-        .categoria-card {
-            position: relative;
-            height: 400px;
+        .card {
+            width: 300px; height: 400px;
             background-color: #111;
             border: 1px solid #222;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            color: #fff;
-            overflow: hidden;
-            border-radius: 8px;
-            transition: all 0.4s ease;
+            display: flex; justify-content: center; align-items: center;
+            text-decoration: none; color: #fff;
+            border-radius: 10px;
+            font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase;
         }
 
-        .categoria-card:hover {
-            border-color: #fff;
-            transform: translateY(-5px);
-        }
+        .card:hover { border-color: #fff; background-color: #1a1a1a; }
 
-        .categoria-card h2 {
-            font-size: 1.4rem;
-            letter-spacing: 6px;
-            z-index: 2;
-            text-transform: uppercase;
-            margin: 0;
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; letter-spacing: 6px; }
+            .card { width: 100%; height: 250px; }
         }
+    </style>
+</head>
+<body>
 
-        /* ANIMACIONES */
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); }
+    <section class="hero">
+        <h1>BYNAC</h1>
+        <div class="line"></div>
+        <p>Beyond Norms and Conformity</p>
+        <a href="#tienda" class="btn-tienda">Tienda</a>
+    </section>
+
+    <section id="tienda">
