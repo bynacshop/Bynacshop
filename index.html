@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,32 +13,72 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             display: flex; justify-content: center; align-items: center;
             height: 100vh; text-align: center;
+            overflow: hidden;
         }
-        .container { animation: fadeIn 2s ease-in; }
-        h1 { font-size: 3.5rem; letter-spacing: 15px; margin-bottom: 5px; font-weight: 900; }
-        .line { width: 40px; height: 2px; background-color: #fff; margin: 20px auto; }
-        p { font-size: 1rem; letter-spacing: 4px; color: #888; text-transform: uppercase; margin-bottom: 40px; }
-        
-        /* EL BOTÓN */
+
+        /* Animación del Título y Eslogan */
+        .fade-in {
+            animation: fadeInDown 1.5s ease-out forwards;
+        }
+
+        h1 {
+            font-size: 3.5rem; letter-spacing: 15px; margin-bottom: 5px; font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 1rem; letter-spacing: 4px; color: #888;
+            text-transform: uppercase; margin-bottom: 40px;
+            animation: fadeInUp 2s ease-out forwards;
+        }
+
+        .line {
+            width: 40px; height: 2px; background-color: #fff;
+            margin: 20px auto;
+        }
+
+        /* BOTÓN REDONDEADO CON ANIMACIÓN RETRASADA */
         .btn-tienda {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 15px 45px;
             border: 1px solid #ffffff;
             color: #ffffff;
             text-decoration: none;
             font-size: 0.8rem;
             letter-spacing: 3px;
             text-transform: uppercase;
+            border-radius: 30px; /* AQUÍ ESTÁ EL REDONDEADO */
             transition: all 0.4s ease;
             background: transparent;
+            
+            /* Animación: espera 2 segundos antes de aparecer */
+            opacity: 0;
+            animation: fadeInOnly 1s ease-out 2s forwards;
         }
+
         .btn-tienda:hover {
             background-color: #ffffff;
             color: #000000;
             box-shadow: 0 0 20px rgba(255,255,255,0.4);
+            transform: scale(1.05);
         }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* KEYFRAMES */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInOnly {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; letter-spacing: 8px; }
             p { font-size: 0.7rem; }
@@ -46,7 +87,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>BYNAC</h1>
+        <h1 class="fade-in">BYNAC</h1>
         <div class="line"></div>
         <p>Beyond Norms and Conformity</p>
         <a href="#" class="btn-tienda">Tienda</a>
