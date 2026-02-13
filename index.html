@@ -1,59 +1,82 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BYNAC | Beyond Norms and Conformity</title>
+    <title>BYNAC | Store</title>
     <style>
-        html { scroll-behavior: smooth; }
+        /* Forzamos que el fondo sea negro y el texto blanco */
         body {
-            margin: 0; padding: 0;
-            background-color: #050505;
-            color: #ffffff;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
             text-align: center;
         }
 
-        /* PORTADA */
-        .hero { 
-            height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center;
-            background: radial-gradient(circle, #111 0%, #050505 100%);
-        }
-        
-        h1 { font-size: 3.5rem; letter-spacing: 15px; margin: 0; text-transform: uppercase; }
-        .line { height: 2px; background-color: #fff; margin: 20px auto; width: 60px; }
-        .tagline { font-size: 1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; }
-        
-        .btn-tienda {
-            display: inline-block; padding: 15px 45px; border: 1px solid #fff; color: #fff;
-            text-decoration: none; font-size: 0.9rem; border-radius: 30px; text-transform: uppercase;
-            letter-spacing: 3px; transition: 0.3s;
-        }
-        .btn-tienda:hover { background: #fff; color: #000; }
-
-        /* SECCIÓN TIENDA */
-        #tienda { padding: 100px 20px; }
-        .producto-card { 
-            max-width: 600px; margin: 0 auto 50px auto; 
-            background: #0a0a0a; padding: 20px; border: 1px solid #1a1a1a; 
-        }
-        .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        
-        /* Esto crea rectángulos grises si no hay foto, para que no se vea negro */
-        .placeholder-img { 
-            width: 100%; height: 400px; background: #1a1a1a; 
-            display: flex; align-items: center; justify-content: center;
-            color: #444; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px;
+        /* Contenedor principal para asegurar visibilidad */
+        .container {
+            display: block !important;
+            padding: 50px 20px;
         }
 
-        .nombre-prod { margin-top: 20px; letter-spacing: 2px; font-weight: bold; }
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 10px;
+            margin-bottom: 10px;
+        }
 
-        /* BOTÓN TECHNO */
-        .music-btn {
-            position: fixed; top: 20px; right: 20px; z-index: 1000;
-            background: none; border: 1px solid #333; color: #fff;
-            padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.7
+        .tagline {
+            color: #888;
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border: 2px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .producto {
+            margin-top: 100px;
+            border: 1px solid #333;
+            padding: 20px;
+            display: inline-block;
+        }
+
+        /* Cuadros grises para que veas dónde irán las fotos */
+        .box {
+            width: 200px;
+            height: 250px;
+            background-color: #222;
+            display: inline-block;
+            margin: 10px;
+            line-height: 250px;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>BYNAC</h1>
+        <p class="tagline">BEYOND NORMS AND CONFORMITY</p>
+        
+        <a href="#tienda" class="btn">VER COLECCIÓN</a>
+
+        <div id="tienda" style="margin-top: 100px;">
+            <div class="producto">
+                <div class="box">FOTO 1</div>
+                <div class="box">FOTO 2</div>
+                <p>CAMISETA GRIS BYNAC</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
