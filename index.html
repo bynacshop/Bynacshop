@@ -12,21 +12,48 @@
             color: #ffffff;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             text-align: center;
-            overflow-x: hidden;
         }
 
-        /* --- ANIMACIONES --- */
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes expandLine { from { width: 0; } to { width: 60px; } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInSimple { from { opacity: 0; } to { opacity: 1; } }
-
-        /* CONTROL DE MÚSICA */
-        .header-controls {
-            position: fixed; top: 20px; right: 20px; z-index: 1000;
+        /* PORTADA */
+        .hero { 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            background: radial-gradient(circle, #111 0%, #050505 100%);
         }
+        
+        h1 { font-size: 3.5rem; letter-spacing: 15px; margin: 0; text-transform: uppercase; }
+        .line { height: 2px; background-color: #fff; margin: 20px auto; width: 60px; }
+        .tagline { font-size: 1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; }
+        
+        .btn-tienda {
+            display: inline-block; padding: 15px 45px; border: 1px solid #fff; color: #fff;
+            text-decoration: none; font-size: 0.9rem; border-radius: 30px; text-transform: uppercase;
+            letter-spacing: 3px; transition: 0.3s;
+        }
+        .btn-tienda:hover { background: #fff; color: #000; }
+
+        /* SECCIÓN TIENDA */
+        #tienda { padding: 100px 20px; }
+        .producto-card { 
+            max-width: 600px; margin: 0 auto 50px auto; 
+            background: #0a0a0a; padding: 20px; border: 1px solid #1a1a1a; 
+        }
+        .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        
+        /* Esto crea rectángulos grises si no hay foto, para que no se vea negro */
+        .placeholder-img { 
+            width: 100%; height: 400px; background: #1a1a1a; 
+            display: flex; align-items: center; justify-content: center;
+            color: #444; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px;
+        }
+
+        .nombre-prod { margin-top: 20px; letter-spacing: 2px; font-weight: bold; }
+
+        /* BOTÓN TECHNO */
         .music-btn {
-            background: none; border: 1px solid rgba(255,255,255,0.3); color: #fff;
-            padding: 8px 15px; border-radius: 20px; cursor: pointer;
-            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px;
-            transition: 0.
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            background: none; border: 1px solid #333; color: #fff;
+            padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.7
