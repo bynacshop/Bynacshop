@@ -10,16 +10,18 @@
             margin: 0; padding: 0;
             background-color: #050505;
             color: #ffffff;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             text-align: center;
+            overflow-x: hidden;
         }
 
-        /* --- ANIMACIONES --- */
+        /* --- KEYFRAMES --- */
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes expandLine { from { width: 0; } to { width: 60px; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes simpleFade { from { opacity: 0; } to { opacity: 1; } }
 
-        /* CONTROL MÚSICA */
+        /* MÚSICA */
         .header-controls { position: fixed; top: 20px; right: 20px; z-index: 1000; }
         .music-btn {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
@@ -29,39 +31,128 @@
 
         /* PORTADA (HERO) */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        h1 { font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; animation: fadeInDown 1.2s ease-out forwards; }
-        .line { height: 2px; background-color: #fff; margin: 20px auto; animation: expandLine 1.2s ease-in-out forwards; animation-delay: 0.5s; }
-        .tagline { font-size: 1.1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1s; }
+        
+        h1 { 
+            font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; 
+            animation: fadeInDown 1s ease-out forwards; 
+        }
+        
+        .line { 
+            height: 2px; background-color: #fff; margin: 20px auto; 
+            animation: expandLine 0.8s ease-in-out forwards; animation-delay: 0.6s; 
+        }
+        
+        .tagline { 
+            font-size: 1.1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; 
+            opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.2s; 
+        }
         
         .btn-tienda {
             display: inline-block; padding: 18px 50px; border: 1.5px solid #ffffff; color: #ffffff;
             text-decoration: none; font-size: 0.9rem; border-radius: 40px; text-transform: uppercase;
-            letter-spacing: 4px; opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1.5s; transition: 0.4s;
+            letter-spacing: 3px; opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.8s; transition: 0.3s;
         }
-        .btn-tienda:hover { background: #fff; color: #000; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* SECCIÓN MENÚ DE SELECCIÓN (LO QUE ME PEDISTE) */
+        /* SECCIÓN MENÚ DE SELECCIÓN (INVISIBLE HASTA QUE ACABE LA PORTADA) */
         #menu-coleccion {
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background-color: #080808; padding: 20px;
+            background-color: #080808; border-top: 1px solid #1a1a1a;
+            opacity: 0; animation: simpleFade 1.5s ease-in forwards; animation-delay: 2.5s;
         }
-        .titulo-menu { font-size: 2rem; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 50px; color: #fff; }
+
+        .titulo-menu { font-size: 2rem; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 50px; }
         
         .grid-seleccion {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; width: 100%;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; width: 90%;
         }
         .opcion-card {
-            height: 400px; background: #111; border: 1px solid #222;
+            height: 350px; background: #111; border: 1px solid #222;
             display: flex; justify-content: center; align-items: center;
-            text-decoration: none; color: #fff; border-radius: 10px;
-            transition: 0.5s; overflow: hidden; position: relative;
+            text-decoration: none; color: #fff; border-radius: 10px; transition: 0.4s;
         }
-        .opcion-card h2 { font-size: 1.5rem; letter-spacing: 5px; text-transform: uppercase; z-index: 2; }
+        .opcion-card h2 { font-size: 1.5rem; letter-spacing: 5px; text-transform: uppercase; }
         .opcion-card:hover { border-color: #fff; transform: translateY(-10px); }
-        .opcion-card:hover h2 { letter-spacing: 10px; }
 
-        /* PRODUCTOS */
-        .seccion-productos { padding: 100px 20px; }
-        .producto-card { max-width: 600px; margin: 0 auto 100px auto; background: #0a0a0a; padding: 30px; border: 1px solid #1a1a1a; }
+        /* PRODUCTOS (TAMBIÉN CON APARICIÓN GRADUAL) */
+        .seccion-productos { 
+            padding: 100px 20px; opacity: 0; 
+            animation: simpleFade 1s ease-in forwards; animation-delay: 3s;
+        }
+        .producto-card { max-width: 600px; margin: 0 auto 100px auto; background: #0a0a0a; padding: 20px; border: 1px solid #1a1a1a; }
         .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .img-container { width: 100%; height: 450
+        .img-container { width: 100%; height: 450px; background: #151515; overflow: hidden; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .nombre-prod { margin-top: 20px; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; letter-spacing: 8px; }
+            .grid-seleccion { grid-template-columns: 1fr; }
+            .opcion-card { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-controls">
+        <button class="music-btn" onclick="toggleMusic()">TECHNO: ON/OFF</button>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <section class="hero">
+        <h1>BYNAC</h1>
+        <div class="line"></div>
+        <p class="tagline">Beyond Norms and Conformity</p>
+        <a href="#menu-coleccion" class="btn-tienda">Ver Colección</a>
+    </section>
+
+    <section id="menu-coleccion">
+        <h2 class="titulo-menu">Selecciona categoría</h2>
+        <div class="grid-seleccion">
+            <a href="#cat-camisetas" class="opcion-card"><h2>Camisetas</h2></a>
+            <a href="#cat-sudaderas" class="opcion-card"><h2>Sudaderas</h2></a>
+        </div>
+    </section>
+
+    <div class="seccion-productos">
+        <div id="cat-camisetas">
+            <div class="producto-card">
+                <div class="fotos-grid">
+                    <div class="img-container"><img src="camiseta_gris_delante.jpg" alt="Camiseta Gris"></div>
+                    <div class="img-container"><img src="camiseta_gris_detras.jpg" alt="Camiseta Gris"></div>
+                </div>
+                <p class="nombre-prod">Camiseta Gris Street</p>
+            </div>
+        </div>
+
+        <div id="cat-sudaderas">
+            <div class="producto-card">
+                <div class="fotos-grid">
+                    <div class="img-container"><img src="sudadera_frente.jpg" alt="Sudadera Negra"></div>
+                    <div class="img-container"><img src="sudadera_espalda.jpg" alt="Sudadera Negra"></div>
+                </div>
+                <p class="nombre-prod">Sudadera Negra BYNAC</p>
+            </div>
+            <div class="producto-card">
+                <div class="fotos-grid">
+                    <div class="img-container"><img src="sudadera_blan_delante.jpg" alt="Sudadera Blanca"></div>
+                    <div class="img-container"><img src="sudadera_blan_detras.jpg" alt="Sudadera Blanca"></div>
+                </div>
+                <p class="nombre-prod">Sudadera Blanca BYNAC</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMusic() {
+            var audio = document.getElementById('bgMusic');
+            if (audio.paused) { audio.play().catch(e => console.log("Falta musica.mp3")); } 
+            else { audio.pause(); }
+        }
+    </script>
+
+</body>
+</html>
