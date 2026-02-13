@@ -16,127 +16,13 @@
         }
 
         /* --- ANIMACIONES --- */
-        @keyframes fadeInDown { 
-            from { opacity: 0; transform: translateY(-30px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-        @keyframes expandLine { 
-            from { width: 0; } 
-            to { width: 60px; } 
-        }
-        @keyframes fadeInUp { 
-            from { opacity: 0; transform: translateY(30px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes expandLine { from { width: 0; } to { width: 60px; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* CONTROL MÚSICA */
-        .header-controls { position: fixed; top: 20px; right: 20px; z-index: 1000; }
-        .music-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
-            padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.65rem;
-            text-transform: uppercase; letter-spacing: 2px; backdrop-filter: blur(5px); transition: 0.3s;
-        }
-        .music-btn:hover { background: #fff; color: #000; }
-
-        /* PORTADA (HERO) */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        
-        h1 { 
-            font-size: 3.5rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; 
-            animation: fadeInDown 1s ease-out forwards; 
-        }
-        
-        .line { 
-            height: 2px; background-color: #fff; margin: 20px auto; 
-            animation: expandLine 1s ease-in-out forwards; animation-delay: 0.5s; 
-        }
-        
-        .tagline { 
-            font-size: 1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; 
-            opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 1s; 
-        }
-        
-        .btn-tienda {
-            display: inline-block; padding: 15px 45px; border: 1.5px solid #ffffff; color: #ffffff;
-            text-decoration: none; font-size: 0.9rem; border-radius: 30px; text-transform: uppercase;
-            letter-spacing: 3px; opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.5s; transition: 0.3s;
-        }
-        .btn-tienda:hover { background: #fff; color: #000; }
-
-        /* PRODUCTOS */
-        #tienda { padding: 100px 20px; }
-        .producto-card { max-width: 600px; margin: 0 auto 100px auto; background: #0a0a0a; padding: 30px; border-radius: 15px; border: 1px solid #1a1a1a; }
-        .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        
-        .img-container { 
-            width: 100%; height: 450px; background: #111; border-radius: 8px; 
-            overflow: hidden; display: flex; align-items: center; justify-content: center;
-        }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .img-container img:hover { transform: scale(1.05); }
-        
-        .nombre-prod { margin-top: 25px; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; letter-spacing: 8px; }
-            .fotos-grid { grid-template-columns: 1fr; }
-            .img-container { height: 350px; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="header-controls">
-        <button class="music-btn" onclick="toggleMusic()">TECHNO: OFF/ON</button>
-    </div>
-
-    <audio id="bgMusic" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
-
-    <section class="hero">
-        <h1>BYNAC</h1>
-        <div class="line"></div>
-        <p class="tagline">Beyond Norms and Conformity</p>
-        <a href="#tienda" class="btn-tienda">Ver Colección</a>
-    </section>
-
-    <section id="tienda">
-        <div class="producto-card">
-            <div class="fotos-grid">
-                <div class="img-container"><img src="camiseta_gris_delante.jpg" alt="Delante"></div>
-                <div class="img-container"><img src="camiseta_gris_detras.jpg" alt="Detrás"></div>
-            </div>
-            <p class="nombre-prod">CAMISETA GRIS STREET</p>
-        </div>
-
-        <div class="producto-card">
-            <div class="fotos-grid">
-                <div class="img-container"><img src="sudadera_frente.jpg" alt="Delante"></div>
-                <div class="img-container"><img src="sudadera_espalda.jpg" alt="Detrás"></div>
-            </div>
-            <p class="nombre-prod">SUDADERA NEGRA BYNAC</p>
-        </div>
-
-        <div class="producto-card">
-            <div class="fotos-grid">
-                <div class="img-container"><img src="sudadera_blan_delante.jpg" alt="Delante"></div>
-                <div class="img-container"><img src="sudadera_blan_detras.jpg" alt="Detrás"></div>
-            </div>
-            <p class="nombre-prod">SUDADERA BLANCA BYNAC</p>
-        </div>
-    </section>
-
-    <script>
-        const audio = document.getElementById('bgMusic');
-        function toggleMusic() {
-            if (audio.paused) { 
-                audio.play().catch(e => alert("Revisa que el archivo se llame musica.mp3")); 
-            } else { 
-                audio.pause(); 
-            }
-        }
-    </script>
-
-</body>
-</html>
+        /* NAVEGACIÓN Y CONTROLES */
+        .nav-container {
+            position: fixed; top: 0; width: 100%; height: 70px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 40px; box-sizing: border-box; z-index: 1000;
+            background: rgba(5,5,5,0.8); backdrop-filter: blur(1
