@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>BYNAC | Beyond Norms and Conformity</title>
+
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <link rel="apple-touch-icon" href="favicon.jpg">
+
     <style>
         html { scroll-behavior: smooth; }
         body {
@@ -15,7 +20,7 @@
             overflow-x: hidden;
         }
 
-        /* --- KEYFRAMES --- */
+        /* --- ANIMACIONES --- */
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes expandLine { from { width: 0; } to { width: 60px; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -28,25 +33,22 @@
             padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.65rem;
             text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
         }
+        .music-btn:hover { background: #fff; color: #000; }
 
-        /* PORTADA (HERO) */
+        /* 1. PORTADA (HERO) */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        
         h1 { 
             font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; 
             animation: fadeInDown 1s ease-out forwards; 
         }
-        
         .line { 
             height: 2px; background-color: #fff; margin: 20px auto; 
             animation: expandLine 0.8s ease-in-out forwards; animation-delay: 0.6s; 
         }
-        
         .tagline { 
             font-size: 1.1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; 
             opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.2s; 
         }
-        
         .btn-tienda {
             display: inline-block; padding: 18px 50px; border: 1.5px solid #ffffff; color: #ffffff;
             text-decoration: none; font-size: 0.9rem; border-radius: 40px; text-transform: uppercase;
@@ -54,15 +56,13 @@
         }
         .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* SECCIÓN MENÚ DE SELECCIÓN (INVISIBLE HASTA QUE ACABE LA PORTADA) */
+        /* 2. MENÚ DE SELECCIÓN (INVISIBLE HASTA QUE ACABE LA INTRO) */
         #menu-coleccion {
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             background-color: #080808; border-top: 1px solid #1a1a1a;
             opacity: 0; animation: simpleFade 1.5s ease-in forwards; animation-delay: 2.5s;
         }
-
         .titulo-menu { font-size: 2rem; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 50px; }
-        
         .grid-seleccion {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; width: 90%;
         }
@@ -74,7 +74,7 @@
         .opcion-card h2 { font-size: 1.5rem; letter-spacing: 5px; text-transform: uppercase; }
         .opcion-card:hover { border-color: #fff; transform: translateY(-10px); }
 
-        /* PRODUCTOS (TAMBIÉN CON APARICIÓN GRADUAL) */
+        /* 3. CATÁLOGOS */
         .seccion-productos { 
             padding: 100px 20px; opacity: 0; 
             animation: simpleFade 1s ease-in forwards; animation-delay: 3s;
@@ -118,6 +118,7 @@
     </section>
 
     <div class="seccion-productos">
+        
         <div id="cat-camisetas">
             <div class="producto-card">
                 <div class="fotos-grid">
@@ -149,8 +150,11 @@
     <script>
         function toggleMusic() {
             var audio = document.getElementById('bgMusic');
-            if (audio.paused) { audio.play().catch(e => console.log("Falta musica.mp3")); } 
-            else { audio.pause(); }
+            if (audio.paused) { 
+                audio.play().catch(e => console.log("Falta musica.mp3 o interacción de usuario necesaria.")); 
+            } else { 
+                audio.pause(); 
+            }
         }
     </script>
 
