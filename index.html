@@ -19,31 +19,104 @@
             overflow-x: hidden;
         }
 
-        /* --- ANIMACIONES --- */
+        /* --- KEYFRAMES --- */
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes expandLine { from { width: 0; } to { width: 60px; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes simpleFade { from { opacity: 0; } to { opacity: 1; } }
-
-        /* MÚSICA */
-        .header-controls { position: fixed; top: 20px; right: 20px; z-index: 1000; }
-        .music-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
-            padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.65rem;
-            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
-        }
+        @keyframes revealAfter { 0% { opacity: 0; } 100% { opacity: 1; } }
 
         /* PORTADA (HERO) */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         
+        /* 1. EL LOGO: Aparece con retraso (delay) */
         .logo-main {
-            width: 120px; /* Ajusta el tamaño aquí */
-            height: auto;
-            margin-bottom: 20px;
-            animation: fadeInDown 1.2s ease-out forwards;
+            width: 120px; height: auto; margin-bottom: 25px;
+            opacity: 0; 
+            animation: revealAfter 1s ease-out forwards; 
+            animation-delay: 2s; /* Aparece al final de la intro de letras */
         }
 
-        h1 { font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; animation: fadeInDown 1s ease-out forwards; animation-delay: 0.3s; }
-        .line { height: 2px; background-color: #fff; margin: 20px auto; animation: expandLine 0.8s ease-in-out forwards; animation-delay: 0.8s; }
-        .tagline { font-size: 1.1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.4s; }
-        .btn-tienda { display: inline-block; padding: 18px 50px; border: 1.5px solid #ffffff; color: #ffffff; text-decoration
+        /* 2. EL NOMBRE: Aparece primero */
+        h1 { 
+            font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; 
+            animation: fadeInDown 1.2s ease-out forwards; 
+        }
+        
+        .line { 
+            height: 2px; background-color: #fff; margin: 20px auto; 
+            animation: expandLine 1s ease-in-out forwards; animation-delay: 0.5s; 
+        }
+        
+        .tagline { 
+            font-size: 1.1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; 
+            opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1s; 
+        }
+        
+        /* 3. EL BOTÓN: Aparece junto con el logo */
+        .btn-tienda {
+            display: inline-block; padding: 18px 50px; border: 1.5px solid #ffffff; color: #ffffff;
+            text-decoration: none; font-size: 0.9rem; border-radius: 40px; text-transform: uppercase;
+            letter-spacing: 3px; 
+            opacity: 0; 
+            animation: revealAfter 1s ease-out forwards; 
+            animation-delay: 2.2s; /* Un poquito después que el logo */
+            transition: 0.3s;
+        }
+        .btn-tienda:hover { background: #fff; color: #000; }
+
+        /* SECCIONES POSTERIORES */
+        #menu-coleccion {
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background-color: #080808; border-top: 1px solid #1a1a1a;
+            opacity: 0; animation: revealAfter 1.5s ease-in forwards; animation-delay: 2.5s;
+        }
+        .titulo-menu { font-size: 2rem; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 50px; }
+        .grid-seleccion { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; width: 90%; }
+        .opcion-card { height: 350px; background: #111; border: 1px solid #222; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #fff; border-radius: 10px; transition: 0.4s; }
+        .opcion-card h2 { font-size: 1.5rem; letter-spacing: 5px; text-transform: uppercase; }
+        .opcion-card:hover { border-color: #fff; transform: translateY(-10px); }
+
+        /* ZOOM */
+        #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        #lightbox img { max-width: 90%; max-height: 90%; border: 2px solid #333; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; letter-spacing: 8px; }
+            .logo-main { width: 90px; }
+            .grid-seleccion { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop><source src="musica.mp3" type="audio/mpeg"></audio>
+
+    <div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src=""></div>
+
+    <section class="hero">
+        <img src="Logo.jpg" alt="Logo BYNAC" class="logo-main">
+        
+        <h1>BYNAC</h1>
+        <div class="line"></div>
+        <p class="tagline">Beyond Norms and Conformity</p>
+        
+        <a href="#menu-coleccion" class="btn-tienda">Ver Colección</a>
+    </section>
+
+    <section id="menu-coleccion">
+        <h2 class="titulo-menu">Selecciona categoría</h2>
+        <div class="grid-seleccion">
+            <a href="#cat-camisetas" class="opcion-card"><h2>Camisetas</h2></a>
+            <a href="#cat-sudaderas" class="opcion-card"><h2>Sudaderas</h2></a>
+        </div>
+    </section>
+
+    <script>
+        function openLightbox(element) {
+            var imgSrc = element.querySelector('img').src;
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
