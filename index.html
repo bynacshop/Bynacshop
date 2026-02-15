@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>BYNAC | Beyond Norms and Conformity</title>
 
     <link rel="icon" type="image/jpeg" href="favicon.jpg">
@@ -33,62 +32,49 @@
             padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.65rem;
             text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
         }
-        .music-btn:hover { background: #fff; color: #000; }
 
-        /* 1. PORTADA (HERO) */
+        /* PORTADA */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        h1 { 
-            font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; 
-            animation: fadeInDown 1s ease-out forwards; 
-        }
-        .line { 
-            height: 2px; background-color: #fff; margin: 20px auto; 
-            animation: expandLine 0.8s ease-in-out forwards; animation-delay: 0.6s; 
-        }
-        .tagline { 
-            font-size: 1.1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; 
-            opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.2s; 
-        }
-        .btn-tienda {
-            display: inline-block; padding: 18px 50px; border: 1.5px solid #ffffff; color: #ffffff;
-            text-decoration: none; font-size: 0.9rem; border-radius: 40px; text-transform: uppercase;
-            letter-spacing: 3px; opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.8s; transition: 0.3s;
-        }
+        h1 { font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; animation: fadeInDown 1s ease-out forwards; }
+        .line { height: 2px; background-color: #fff; margin: 20px auto; animation: expandLine 0.8s ease-in-out forwards; animation-delay: 0.6s; }
+        .tagline { font-size: 1.1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.2s; }
+        .btn-tienda { display: inline-block; padding: 18px 50px; border: 1.5px solid #ffffff; color: #ffffff; text-decoration: none; font-size: 0.9rem; border-radius: 40px; text-transform: uppercase; letter-spacing: 3px; opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 1.8s; transition: 0.3s; }
         .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* 2. MENÚ DE SELECCIÓN (INVISIBLE HASTA QUE ACABE LA INTRO) */
-        #menu-coleccion {
-            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background-color: #080808; border-top: 1px solid #1a1a1a;
-            opacity: 0; animation: simpleFade 1.5s ease-in forwards; animation-delay: 2.5s;
-        }
+        /* SELECCIÓN CATEGORÍA */
+        #menu-coleccion { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #080808; border-top: 1px solid #1a1a1a; opacity: 0; animation: simpleFade 1.5s ease-in forwards; animation-delay: 2.5s; }
         .titulo-menu { font-size: 2rem; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 50px; }
-        .grid-seleccion {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; width: 90%;
-        }
-        .opcion-card {
-            height: 350px; background: #111; border: 1px solid #222;
-            display: flex; justify-content: center; align-items: center;
-            text-decoration: none; color: #fff; border-radius: 10px; transition: 0.4s;
-        }
+        .grid-seleccion { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; width: 90%; }
+        .opcion-card { height: 350px; background: #111; border: 1px solid #222; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #fff; border-radius: 10px; transition: 0.4s; }
         .opcion-card h2 { font-size: 1.5rem; letter-spacing: 5px; text-transform: uppercase; }
         .opcion-card:hover { border-color: #fff; transform: translateY(-10px); }
 
-        /* 3. CATÁLOGOS */
-        .seccion-productos { 
-            padding: 100px 20px; opacity: 0; 
-            animation: simpleFade 1s ease-in forwards; animation-delay: 3s;
-        }
+        /* PRODUCTOS */
+        .seccion-productos { padding: 100px 20px; opacity: 0; animation: simpleFade 1s ease-in forwards; animation-delay: 3s; }
         .producto-card { max-width: 600px; margin: 0 auto 100px auto; background: #0a0a0a; padding: 20px; border: 1px solid #1a1a1a; }
         .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .img-container { width: 100%; height: 450px; background: #151515; overflow: hidden; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* Contenedor de imagen con cursor de lupa */
+        .img-container { width: 100%; height: 450px; background: #151515; overflow: hidden; cursor: zoom-in; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+        .img-container:hover img { opacity: 0.8; }
         .nombre-prod { margin-top: 20px; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; }
+
+        /* --- VISOR DE IMAGEN GRANDE (LIGHTBOX) --- */
+        #lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none; /* Escondido por defecto */
+            justify-content: center; align-items: center;
+            z-index: 2000; cursor: zoom-out;
+        }
+        #lightbox img { max-width: 90%; max-height: 90%; border: 2px solid #333; box-shadow: 0 0 30px rgba(0,0,0,0.5); }
 
         @media (max-width: 600px) {
             h1 { font-size: 2.5rem; letter-spacing: 8px; }
             .grid-seleccion { grid-template-columns: 1fr; }
             .opcion-card { height: 200px; }
+            .img-container { height: 350px; }
         }
     </style>
 </head>
@@ -101,6 +87,10 @@
     <audio id="bgMusic" loop>
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
+
+    <div id="lightbox" onclick="this.style.display='none'">
+        <img id="lightbox-img" src="" alt="Zoom">
+    </div>
 
     <section class="hero">
         <h1>BYNAC</h1>
@@ -118,12 +108,11 @@
     </section>
 
     <div class="seccion-productos">
-        
         <div id="cat-camisetas">
             <div class="producto-card">
                 <div class="fotos-grid">
-                    <div class="img-container"><img src="camiseta_gris_delante.jpg" alt="Camiseta Gris"></div>
-                    <div class="img-container"><img src="camiseta_gris_detras.jpg" alt="Camiseta Gris"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="camiseta_gris_delante.jpg"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="camiseta_gris_detras.jpg"></div>
                 </div>
                 <p class="nombre-prod">Camiseta Gris Street</p>
             </div>
@@ -132,15 +121,15 @@
         <div id="cat-sudaderas">
             <div class="producto-card">
                 <div class="fotos-grid">
-                    <div class="img-container"><img src="sudadera_frente.jpg" alt="Sudadera Negra"></div>
-                    <div class="img-container"><img src="sudadera_espalda.jpg" alt="Sudadera Negra"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="sudadera_frente.jpg"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="sudadera_espalda.jpg"></div>
                 </div>
                 <p class="nombre-prod">Sudadera Negra BYNAC</p>
             </div>
             <div class="producto-card">
                 <div class="fotos-grid">
-                    <div class="img-container"><img src="sudadera_blan_delante.jpg" alt="Sudadera Blanca"></div>
-                    <div class="img-container"><img src="sudadera_blan_detras.jpg" alt="Sudadera Blanca"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="sudadera_blan_delante.jpg"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="sudadera_blan_detras.jpg"></div>
                 </div>
                 <p class="nombre-prod">Sudadera Blanca BYNAC</p>
             </div>
@@ -148,13 +137,17 @@
     </div>
 
     <script>
+        // Función para la música
         function toggleMusic() {
             var audio = document.getElementById('bgMusic');
-            if (audio.paused) { 
-                audio.play().catch(e => console.log("Falta musica.mp3 o interacción de usuario necesaria.")); 
-            } else { 
-                audio.pause(); 
-            }
+            if (audio.paused) { audio.play(); } else { audio.pause(); }
+        }
+
+        // Función para el Zoom de las fotos
+        function openLightbox(element) {
+            var imgSrc = element.querySelector('img').src;
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox').style.display = 'flex';
         }
     </script>
 
