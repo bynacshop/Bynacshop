@@ -21,9 +21,7 @@
             position: fixed;
             top: 25px;
             left: 25px;
-            /* Z-index altísimo para que nunca desaparezca tras los fondos */
             z-index: 9999; 
-            /* Esto permite clicar los botones que queden debajo del logo */
             pointer-events: none; 
         }
         
@@ -54,13 +52,12 @@
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
             padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.6rem;
             text-transform: uppercase; letter-spacing: 2px;
-            pointer-events: auto; /* El botón de música SÍ debe ser clicable */
+            pointer-events: auto;
         }
 
-        /* SECCIONES */
+        /* PORTADA */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         h1 { font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; }
-        
         .btn-tienda { 
             display: inline-block; padding: 18px 50px; border: 1.5px solid #ffffff; color: #ffffff; 
             text-decoration: none; font-size: 0.9rem; border-radius: 40px; text-transform: uppercase; 
@@ -68,22 +65,31 @@
         }
         .btn-tienda:hover { background: #fff; color: #000; }
 
+        /* CATEGORÍAS */
         #menu-coleccion {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             background-color: #080808; border-top: 1px solid #1a1a1a; padding: 60px 0;
         }
         .grid-seleccion { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 90%; max-width: 900px; }
-        .opcion-card { 
-            height: 280px; background: #111; border: 1px solid #222; 
-            display: flex; justify-content: center; align-items: center; 
-            text-decoration: none; color: #fff; border-radius: 10px;
-        }
+        .opcion-card { height: 280px; background: #111; border: 1px solid #222; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #fff; border-radius: 10px; }
+
+        /* SECCIÓN PRODUCTOS */
+        .seccion-productos { padding: 80px 20px; background-color: #050505; }
+        .producto-card { max-width: 800px; margin: 0 auto 100px auto; background: #0a0a0a; padding: 20px; border: 1px solid #1a1a1a; }
+        .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .img-container { width: 100%; height: 500px; background: #151515; overflow: hidden; cursor: zoom-in; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+        .img-container:hover img { opacity: 0.8; }
+
+        /* LIGHTBOX ZOOM */
+        #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 11000; cursor: zoom-out; }
+        #lightbox img { max-width: 90%; max-height: 90%; border: 1px solid #333; }
 
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; letter-spacing: 8px; }
+            .grid-seleccion { grid-template-columns: 1fr; }
+            .img-container { height: 350px; }
             .brand-corner img { width: 45px; }
-            .brand-corner { top: 15px; left: 15px; }
-            .header-controls { top: 15px; right: 15px; }
         }
     </style>
 </head>
@@ -99,6 +105,8 @@
 
     <audio id="bgMusic" loop><source src="musica.mp3" type="audio/mpeg"></audio>
 
+    <div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src=""></div>
+
     <section class="hero">
         <h1>BYNAC</h1>
         <p style="letter-spacing: 5px; color: #666;">BEYOND NORMS AND CONFORMITY</p>
@@ -108,15 +116,44 @@
     <section id="menu-coleccion">
         <h2 style="letter-spacing: 8px; margin-bottom: 40px;">CATEGORÍAS</h2>
         <div class="grid-seleccion">
-            <a href="#" class="opcion-card"><h2>Camisetas</h2></a>
-            <a href="#" class="opcion-card"><h2>Sudaderas</h2></a>
+            <a href="#cat-camisetas" class="opcion-card"><h2>Camisetas</h2></a>
+            <a href="#cat-sudaderas" class="opcion-card"><h2>Sudaderas</h2></a>
         </div>
     </section>
+
+    <div class="seccion-productos">
+        <div id="cat-camisetas">
+            <h3 style="letter-spacing: 5px; margin-bottom: 30px;">COLECCIÓN CAMISETAS</h3>
+            <div class="producto-card">
+                <div class="fotos-grid">
+                    <div class="img-container" onclick="openLightbox(this)"><img src="camiseta_gris_delante.jpg"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="camiseta_gris_detras.jpg"></div>
+                </div>
+                <p style="letter-spacing: 3px; font-weight: bold; text-transform: uppercase; margin-top: 20px;">Camiseta Gris Street</p>
+            </div>
+        </div>
+
+        <div id="cat-sudaderas">
+            <h3 style="letter-spacing: 5px; margin-bottom: 30px;">COLECCIÓN SUDADERAS</h3>
+            <div class="producto-card">
+                <div class="fotos-grid">
+                    <div class="img-container" onclick="openLightbox(this)"><img src="sudadera_frente.jpg"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="sudadera_espalda.jpg"></div>
+                </div>
+                <p style="letter-spacing: 3px; font-weight: bold; text-transform: uppercase; margin-top: 20px;">Sudadera Negra BYNAC</p>
+            </div>
+        </div>
+    </div>
 
     <script>
         function toggleMusic() {
             var audio = document.getElementById('bgMusic');
             if (audio.paused) { audio.play(); } else { audio.pause(); }
+        }
+        function openLightbox(element) {
+            var imgSrc = element.querySelector('img').src;
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox').style.display = 'flex';
         }
     </script>
 </body>
