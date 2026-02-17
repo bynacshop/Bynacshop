@@ -32,7 +32,7 @@
             animation-delay: 0.5s, 3s; 
         }
 
-        /* ANIMACIONES DE LA PORTADA */
+        /* ANIMACIONES PORTADA */
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes expandLine { from { width: 0; } to { width: 60px; } }
@@ -55,54 +55,36 @@
             text-transform: uppercase; letter-spacing: 2px;
         }
 
-        /* PORTADA RESTAURADA */
+        /* PORTADA */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        h1 { 
-            font-size: 3.5rem; letter-spacing: 12px; text-transform: uppercase; margin: 0; 
-            animation: fadeInDown 1.2s ease-out forwards;
-        }
-        .line { 
-            height: 2px; background-color: #fff; margin: 20px auto; 
-            animation: expandLine 1s ease-in-out forwards; animation-delay: 0.6s;
-        }
-        .tagline { 
-            font-size: 0.9rem; letter-spacing: 5px; color: #666; text-transform: uppercase;
-            opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1.2s;
-        }
-        .btn-tienda { 
-            display: inline-block; padding: 15px 40px; border: 1.5px solid #ffffff; color: #ffffff; 
-            text-decoration: none; font-size: 0.8rem; border-radius: 40px; text-transform: uppercase; 
-            letter-spacing: 3px; margin-top: 40px; transition: 0.3s;
-            opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1.8s;
-        }
+        h1 { font-size: 3.5rem; letter-spacing: 12px; text-transform: uppercase; margin: 0; animation: fadeInDown 1.2s ease-out forwards; }
+        .line { height: 2px; background-color: #fff; margin: 20px auto; animation: expandLine 1s ease-in-out forwards; animation-delay: 0.6s; }
+        .tagline { font-size: 0.9rem; letter-spacing: 5px; color: #666; text-transform: uppercase; opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1.2s; }
+        .btn-tienda { display: inline-block; padding: 15px 40px; border: 1.5px solid #ffffff; color: #ffffff; text-decoration: none; font-size: 0.8rem; border-radius: 40px; text-transform: uppercase; letter-spacing: 3px; margin-top: 40px; transition: 0.3s; opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1.8s; }
         .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* SECCIÓN CATEGORÍAS (SIN CORTES) */
-        #menu-coleccion {
-            padding: 100px 0;
-            background-color: #050505;
-            display: flex; flex-direction: column; align-items: center;
-        }
+        /* SECCIÓN CATEGORÍAS */
+        #menu-coleccion { padding: 100px 0; background-color: #050505; display: flex; flex-direction: column; align-items: center; }
         .titulo-seccion { letter-spacing: 10px; margin-bottom: 60px; text-transform: uppercase; font-size: 1.8rem; }
         .grid-seleccion { display: flex; flex-direction: column; gap: 25px; width: 85%; max-width: 450px; }
-        .opcion-card { 
-            height: 220px; background: #0d0d0d; border: 1px solid #1a1a1a; 
-            display: flex; justify-content: center; align-items: center; 
-            text-decoration: none; color: #fff; border-radius: 12px; transition: 0.3s;
-        }
+        .opcion-card { height: 200px; background: #0d0d0d; border: 1px solid #1a1a1a; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #fff; border-radius: 12px; transition: 0.3s; }
         .opcion-card h2 { font-size: 1.5rem; letter-spacing: 6px; text-transform: uppercase; margin: 0; line-height: 1; }
         .opcion-card:hover { border-color: #fff; background: #111; }
 
         /* PRODUCTOS */
-        .seccion-productos { padding: 60px 20px; }
-        .producto-card { max-width: 600px; margin: 0 auto 80px auto; background: #0a0a0a; padding: 15px; border: 1px solid #1a1a1a; }
+        .seccion-productos { padding: 60px 20px; background-color: #050505; }
+        .producto-card { max-width: 600px; margin: 0 auto 100px auto; background: #0a0a0a; padding: 15px; border: 1px solid #1a1a1a; }
         .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .img-container { width: 100%; height: 350px; background: #151515; overflow: hidden; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .img-container { width: 100%; height: 400px; background: #151515; overflow: hidden; cursor: zoom-in; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+        
+        #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 11000; cursor: zoom-out; }
+        #lightbox img { max-width: 90%; max-height: 90%; border: 1px solid #333; }
 
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; }
             .opcion-card { height: 180px; }
+            .img-container { height: 320px; }
         }
     </style>
 </head>
@@ -117,6 +99,8 @@
     </div>
 
     <audio id="bgMusic" loop><source src="musica.mp3" type="audio/mpeg"></audio>
+
+    <div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src=""></div>
 
     <section class="hero">
         <h1>BYNAC</h1>
@@ -135,12 +119,24 @@
 
     <div class="seccion-productos">
         <div id="cat-camisetas">
+            <h3 style="letter-spacing: 5px; margin-bottom: 30px;">CAMISETAS</h3>
             <div class="producto-card">
                 <div class="fotos-grid">
-                    <div class="img-container"><img src="camiseta_gris_delante.jpg"></div>
-                    <div class="img-container"><img src="camiseta_gris_detras.jpg"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="camiseta_gris_delante.jpg"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="camiseta_gris_detras.jpg"></div>
                 </div>
                 <p style="letter-spacing: 2px; text-transform: uppercase; margin-top: 15px;">Camiseta Gris Street</p>
+            </div>
+        </div>
+
+        <div id="cat-sudaderas">
+            <h3 style="letter-spacing: 5px; margin-top: 50px; margin-bottom: 30px;">SUDADERAS</h3>
+            <div class="producto-card">
+                <div class="fotos-grid">
+                    <div class="img-container" onclick="openLightbox(this)"><img src="sudadera_frente.jpg"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="sudadera_espalda.jpg"></div>
+                </div>
+                <p style="letter-spacing: 2px; text-transform: uppercase; margin-top: 15px;">Sudadera Negra BYNAC</p>
             </div>
         </div>
     </div>
@@ -149,6 +145,11 @@
         function toggleMusic() {
             var audio = document.getElementById('bgMusic');
             if (audio.paused) { audio.play(); } else { audio.pause(); }
+        }
+        function openLightbox(element) {
+            var imgSrc = element.querySelector('img').src;
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox').style.display = 'flex';
         }
     </script>
 </body>
