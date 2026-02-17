@@ -16,13 +16,14 @@
             overflow-x: hidden;
         }
 
-        /* --- LOGO BLANCO PURO QUE NO ESTORBA --- */
+        /* --- LOGO SIEMPRE VISIBLE Y TRASPASABLE --- */
         .brand-corner {
             position: fixed;
             top: 25px;
             left: 25px;
-            z-index: 1; /* Por debajo de botones */
-            /* IMPORTANTE: Permite que los clics pasen a través del logo */
+            /* Z-index altísimo para que nunca desaparezca tras los fondos */
+            z-index: 9999; 
+            /* Esto permite clicar los botones que queden debajo del logo */
             pointer-events: none; 
         }
         
@@ -30,15 +31,15 @@
             width: 55px;
             height: auto;
             display: block;
-            opacity: 0; /* Empieza invisible para el fade-in */
-            filter: brightness(1); /* Blanco total */
+            opacity: 0;
+            filter: brightness(1);
             animation: fadeInFull 1.2s ease-out forwards, darkGlitch 7s infinite;
             animation-delay: 0.5s, 3s; 
         }
 
         @keyframes fadeInFull { from { opacity: 0; } to { opacity: 1; } }
 
-        /* GLITCH NEGRO (Sutil) */
+        /* GLITCH NEGRO (Sutil cada 7 seg) */
         @keyframes darkGlitch {
             0%, 90%, 94%, 98%, 100% { transform: translate(0); filter: brightness(1); clip-path: inset(0 0 0 0); }
             91% { transform: translate(-3px, 1px); filter: brightness(0); clip-path: inset(20% 0 50% 0); }
@@ -47,37 +48,42 @@
             97% { transform: translate(-2px, 0); clip-path: inset(70% 0 10% 0); }
         }
 
-        /* CONTROLES Y BOTONES (Z-INDEX ALTO) */
-        .header-controls { position: fixed; top: 25px; right: 25px; z-index: 2000; }
+        /* MÚSICA */
+        .header-controls { position: fixed; top: 25px; right: 25px; z-index: 10000; }
         .music-btn {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
             padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.6rem;
             text-transform: uppercase; letter-spacing: 2px;
-            pointer-events: auto; /* Estos sí reciben clics */
+            pointer-events: auto; /* El botón de música SÍ debe ser clicable */
         }
 
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 10; }
+        /* SECCIONES */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         h1 { font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; }
         
         .btn-tienda { 
             display: inline-block; padding: 18px 50px; border: 1.5px solid #ffffff; color: #ffffff; 
             text-decoration: none; font-size: 0.9rem; border-radius: 40px; text-transform: uppercase; 
-            letter-spacing: 3px; margin-top: 50px; transition: 0.3s; background: transparent;
-            position: relative; z-index: 20;
+            letter-spacing: 3px; margin-top: 50px; transition: 0.3s;
         }
         .btn-tienda:hover { background: #fff; color: #000; }
 
         #menu-coleccion {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             background-color: #080808; border-top: 1px solid #1a1a1a; padding: 60px 0;
-            position: relative; z-index: 10;
         }
         .grid-seleccion { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 90%; max-width: 900px; }
-        .opcion-card { height: 280px; background: #111; border: 1px solid #222; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #fff; border-radius: 10px; }
+        .opcion-card { 
+            height: 280px; background: #111; border: 1px solid #222; 
+            display: flex; justify-content: center; align-items: center; 
+            text-decoration: none; color: #fff; border-radius: 10px;
+        }
 
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; letter-spacing: 8px; }
             .brand-corner img { width: 45px; }
+            .brand-corner { top: 15px; left: 15px; }
+            .header-controls { top: 15px; right: 15px; }
         }
     </style>
 </head>
