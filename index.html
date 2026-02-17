@@ -32,6 +32,13 @@
             animation-delay: 0.5s, 3s; 
         }
 
+        /* ANIMACIONES DE LA PORTADA */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes expandLine { from { width: 0; } to { width: 60px; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* GLITCH NEGRO */
         @keyframes darkGlitch {
             0%, 90%, 94%, 98%, 100% { transform: translate(0); filter: brightness(1); clip-path: inset(0 0 0 0); }
             91% { transform: translate(-3px, 1px); filter: brightness(0); clip-path: inset(20% 0 50% 0); }
@@ -40,7 +47,7 @@
             97% { transform: translate(-2px, 0); clip-path: inset(70% 0 10% 0); }
         }
 
-        /* MÚSICA */
+        /* CONTROLES */
         .header-controls { position: fixed; top: 20px; right: 20px; z-index: 10000; }
         .music-btn {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
@@ -48,57 +55,42 @@
             text-transform: uppercase; letter-spacing: 2px;
         }
 
-        /* PORTADA */
+        /* PORTADA RESTAURADA */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        h1 { font-size: 3rem; letter-spacing: 12px; text-transform: uppercase; margin: 0; }
+        h1 { 
+            font-size: 3.5rem; letter-spacing: 12px; text-transform: uppercase; margin: 0; 
+            animation: fadeInDown 1.2s ease-out forwards;
+        }
+        .line { 
+            height: 2px; background-color: #fff; margin: 20px auto; 
+            animation: expandLine 1s ease-in-out forwards; animation-delay: 0.6s;
+        }
+        .tagline { 
+            font-size: 0.9rem; letter-spacing: 5px; color: #666; text-transform: uppercase;
+            opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1.2s;
+        }
         .btn-tienda { 
             display: inline-block; padding: 15px 40px; border: 1.5px solid #ffffff; color: #ffffff; 
             text-decoration: none; font-size: 0.8rem; border-radius: 40px; text-transform: uppercase; 
             letter-spacing: 3px; margin-top: 40px; transition: 0.3s;
+            opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1.8s;
         }
+        .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* --- SECCIÓN CATEGORÍAS CORREGIDA --- */
+        /* SECCIÓN CATEGORÍAS (SIN CORTES) */
         #menu-coleccion {
             padding: 100px 0;
             background-color: #050505;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; flex-direction: column; align-items: center;
         }
-        .titulo-seccion { 
-            letter-spacing: 10px; 
-            margin-bottom: 60px; 
-            text-transform: uppercase; 
-            font-size: 1.8rem;
-            width: 100%;
-        }
-        .grid-seleccion { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 25px; 
-            width: 85%; 
-            max-width: 450px; 
-        }
+        .titulo-seccion { letter-spacing: 10px; margin-bottom: 60px; text-transform: uppercase; font-size: 1.8rem; }
+        .grid-seleccion { display: flex; flex-direction: column; gap: 25px; width: 85%; max-width: 450px; }
         .opcion-card { 
-            height: 220px; /* Altura fija para evitar cortes */
-            background: #0d0d0d; 
-            border: 1px solid #1a1a1a; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            text-decoration: none; 
-            color: #fff; 
-            border-radius: 12px;
-            transition: 0.3s;
-            overflow: hidden;
+            height: 220px; background: #0d0d0d; border: 1px solid #1a1a1a; 
+            display: flex; justify-content: center; align-items: center; 
+            text-decoration: none; color: #fff; border-radius: 12px; transition: 0.3s;
         }
-        .opcion-card h2 { 
-            font-size: 1.5rem; 
-            letter-spacing: 6px; 
-            text-transform: uppercase;
-            margin: 0;
-            line-height: 1; /* Evita que el texto se corte por arriba/abajo */
-        }
+        .opcion-card h2 { font-size: 1.5rem; letter-spacing: 6px; text-transform: uppercase; margin: 0; line-height: 1; }
         .opcion-card:hover { border-color: #fff; background: #111; }
 
         /* PRODUCTOS */
@@ -110,10 +102,8 @@
 
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; }
-            .opcion-card { height: 180px; } /* Un poco más pequeñas en móvil */
-            .opcion-card h2 { font-size: 1.2rem; }
+            .opcion-card { height: 180px; }
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -130,19 +120,16 @@
 
     <section class="hero">
         <h1>BYNAC</h1>
-        <p style="letter-spacing: 5px; color: #666; margin-top: 10px;">BEYOND NORMS AND CONFORMITY</p>
+        <div class="line"></div>
+        <p class="tagline">Beyond Norms and Conformity</p>
         <a href="#menu-coleccion" class="btn-tienda">VER COLECCIÓN</a>
     </section>
 
     <section id="menu-coleccion">
         <h2 class="titulo-seccion">CATEGORÍAS</h2>
         <div class="grid-seleccion">
-            <a href="#cat-camisetas" class="opcion-card">
-                <h2>CAMISETAS</h2>
-            </a>
-            <a href="#cat-sudaderas" class="opcion-card">
-                <h2>SUDADERAS</h2>
-            </a>
+            <a href="#cat-camisetas" class="opcion-card"><h2>CAMISETAS</h2></a>
+            <a href="#cat-sudaderas" class="opcion-card"><h2>SUDADERAS</h2></a>
         </div>
     </section>
 
