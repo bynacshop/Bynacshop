@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BYNAC | Beyond Norms and Conformity</title>
 
-    <link rel="icon" type="image/jpeg" href="Logo.jpg">
-    <link rel="apple-touch-icon" href="Logo.jpg">
-
     <style>
         html { scroll-behavior: smooth; }
         body {
@@ -19,7 +16,7 @@
             overflow-x: hidden;
         }
 
-        /* --- LOGO CON DISTORSIÓN EN NEGRO (VOID GLITCH) --- */
+        /* --- LOGO CON DISTORSIÓN DE BAJA FRECUENCIA --- */
         .brand-corner {
             position: fixed;
             top: 25px;
@@ -32,63 +29,71 @@
             height: auto;
             opacity: 0;
             display: block;
-            /* Animación de entrada y glitch de sombras negras */
-            animation: fadeIn 1.2s ease-out forwards, darkGlitch 0.8s infinite;
-            animation-delay: 0.5s, 2s; 
+            /* La animación dura 7 segundos en total */
+            animation: fadeIn 1.2s ease-out forwards, darkGlitch 7s infinite;
+            animation-delay: 0.5s, 3s; 
         }
 
-        /* ANIMACIÓN GLITCH NEGRO / SOMBRAS */
+        /* ANIMACIÓN: 90% del tiempo quieto, 10% de distorsión negra */
         @keyframes darkGlitch {
-            0% { transform: translate(0); filter: brightness(1); }
-            10% { transform: translate(-2px, -1px); clip-path: inset(10% 0 30% 0); filter: brightness(0); }
-            20% { transform: translate(2px, 1px); clip-path: inset(40% 0 10% 0); filter: brightness(1); }
-            30% { transform: translate(-1px, 2px); filter: contrast(2) brightness(0.5); }
-            40% { transform: translate(0); clip-path: inset(0 0 0 0); filter: brightness(1); }
-            50% { transform: translate(1px, -2px); filter: brightness(0); }
-            52% { filter: brightness(1); }
-            100% { transform: translate(0); }
+            /* Quieto y normal */
+            0%, 90%, 94%, 98%, 100% { 
+                transform: translate(0); 
+                filter: brightness(1); 
+                clip-path: inset(0 0 0 0); 
+            }
+            /* El "Fallo" ocurre solo al final del ciclo (entre el 91% y 97%) */
+            91% { 
+                transform: translate(-3px, 1px); 
+                filter: brightness(0); 
+                clip-path: inset(20% 0 50% 0);
+            }
+            93% { 
+                transform: translate(3px, -1px); 
+                filter: brightness(0.2);
+            }
+            95% { 
+                filter: brightness(0);
+                transform: scaleY(1.1);
+            }
+            97% { 
+                transform: translate(-2px, 0);
+                clip-path: inset(70% 0 10% 0);
+            }
         }
 
-        /* MÚSICA */
+        /* --- ESTILOS RESTANTES --- */
         .header-controls { position: fixed; top: 25px; right: 25px; z-index: 1100; }
         .music-btn {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
             padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.6rem;
-            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 2px;
         }
 
-        /* PORTADA */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        h1 { font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; animation: fadeInDown 1.2s ease-out forwards; }
+        h1 { font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; }
         .tagline { font-size: 1rem; letter-spacing: 5px; color: #444; margin-top: 10px; text-transform: uppercase; }
 
         .btn-tienda { 
             display: inline-block; padding: 18px 50px; border: 1.5px solid #ffffff; color: #ffffff; 
             text-decoration: none; font-size: 0.9rem; border-radius: 40px; text-transform: uppercase; 
             letter-spacing: 3px; margin-top: 50px; transition: 0.3s;
-            opacity: 0; animation: fadeIn 1s forwards; animation-delay: 2.2s;
         }
         .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* SECCIONES */
         #menu-coleccion {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             background-color: #080808; border-top: 1px solid #1a1a1a; padding: 60px 0;
         }
         .grid-seleccion { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 90%; max-width: 900px; }
-        .opcion-card { height: 280px; background: #111; border: 1px solid #222; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #fff; border-radius: 10px; transition: 0.4s; }
-        .opcion-card h2 { font-size: 1.3rem; letter-spacing: 5px; }
-        .opcion-card:hover { border-color: #fff; }
+        .opcion-card { height: 280px; background: #111; border: 1px solid #222; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #fff; border-radius: 10px; }
 
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; letter-spacing: 8px; }
             .grid-seleccion { grid-template-columns: 1fr; }
             .brand-corner img { width: 45px; }
         }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -120,8 +125,7 @@
     <script>
         function toggleMusic() {
             var audio = document.getElementById('bgMusic');
-            if (audio.paused) { audio.play().catch(e => console.log("User interaction required")); } 
-            else { audio.pause(); }
+            if (audio.paused) { audio.play(); } else { audio.pause(); }
         }
     </script>
 </body>
