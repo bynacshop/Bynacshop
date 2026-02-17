@@ -16,13 +16,12 @@
             overflow-x: hidden;
         }
 
-        /* --- LOGO FIJO SIEMPRE VISIBLE --- */
+        /* --- LOGO ANCLADO ARRIBA (NO SIGUE EL SCROLL) --- */
         .brand-corner {
-            position: fixed;
+            position: absolute; /* Cambiado de fixed a absolute */
             top: 20px;
             left: 20px;
             z-index: 9999; 
-            pointer-events: none;
         }
         .brand-corner img {
             width: 45px;
@@ -47,7 +46,7 @@
             97% { transform: translate(-2px, 0); clip-path: inset(70% 0 10% 0); }
         }
 
-        /* CONTROLES MÚSICA */
+        /* CONTROLES MÚSICA (Estos sí se mantienen fijos para poder apagarla siempre) */
         .header-controls { position: fixed; top: 20px; right: 20px; z-index: 10000; }
         .music-btn {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
@@ -63,7 +62,7 @@
         .btn-tienda { display: inline-block; padding: 15px 40px; border: 1.5px solid #ffffff; color: #ffffff; text-decoration: none; font-size: 0.8rem; border-radius: 40px; text-transform: uppercase; letter-spacing: 3px; margin-top: 40px; transition: 0.3s; opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1.8s; }
         .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* SECCIÓN CATEGORÍAS (SIN CORTES) */
+        /* SECCIÓN CATEGORÍAS */
         #menu-coleccion { padding: 100px 0; background-color: #050505; display: flex; flex-direction: column; align-items: center; }
         .titulo-seccion { letter-spacing: 10px; margin-bottom: 60px; text-transform: uppercase; font-size: 1.8rem; }
         .grid-seleccion { display: flex; flex-direction: column; gap: 25px; width: 85%; max-width: 450px; }
