@@ -38,7 +38,7 @@
         @keyframes expandLine { from { width: 0; } to { width: 60px; } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* GLITCH NEGRO */
+        /* GLITCH NEGRO SUTIL */
         @keyframes darkGlitch {
             0%, 90%, 94%, 98%, 100% { transform: translate(0); filter: brightness(1); clip-path: inset(0 0 0 0); }
             91% { transform: translate(-3px, 1px); filter: brightness(0); clip-path: inset(20% 0 50% 0); }
@@ -47,7 +47,7 @@
             97% { transform: translate(-2px, 0); clip-path: inset(70% 0 10% 0); }
         }
 
-        /* CONTROLES */
+        /* CONTROLES MÚSICA */
         .header-controls { position: fixed; top: 20px; right: 20px; z-index: 10000; }
         .music-btn {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
@@ -63,7 +63,7 @@
         .btn-tienda { display: inline-block; padding: 15px 40px; border: 1.5px solid #ffffff; color: #ffffff; text-decoration: none; font-size: 0.8rem; border-radius: 40px; text-transform: uppercase; letter-spacing: 3px; margin-top: 40px; transition: 0.3s; opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1.8s; }
         .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* SECCIÓN CATEGORÍAS */
+        /* SECCIÓN CATEGORÍAS (SIN CORTES) */
         #menu-coleccion { padding: 100px 0; background-color: #050505; display: flex; flex-direction: column; align-items: center; }
         .titulo-seccion { letter-spacing: 10px; margin-bottom: 60px; text-transform: uppercase; font-size: 1.8rem; }
         .grid-seleccion { display: flex; flex-direction: column; gap: 25px; width: 85%; max-width: 450px; }
@@ -142,8 +142,8 @@
 
             <div class="producto-card">
                 <div class="fotos-grid">
-                    <div class="img-container" onclick="openLightbox(this)"><img src="sudadera_blanca_frente.jpg"></div>
-                    <div class="img-container" onclick="openLightbox(this)"><img src="sudadera_blanca_espalda.jpg"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="sudadera_blan_delante.jpg"></div>
+                    <div class="img-container" onclick="openLightbox(this)"><img src="sudadera_blan_detras.jpg"></div>
                 </div>
                 <p style="letter-spacing: 2px; text-transform: uppercase; margin-top: 15px;">Sudadera Blanca BYNAC</p>
             </div>
