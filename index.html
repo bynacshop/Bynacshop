@@ -19,45 +19,33 @@
             overflow-x: hidden;
         }
 
-        /* --- LOGO CON DISTORSIÓN (GLITCH) --- */
+        /* --- LOGO CON DISTORSIÓN AUTOMÁTICA INFINITA --- */
         .brand-corner {
             position: fixed;
             top: 25px;
             left: 25px;
             z-index: 1100;
-            cursor: pointer;
         }
+        
         .brand-corner img {
             width: 55px;
             height: auto;
             opacity: 0;
             display: block;
-            /* Animación de entrada + Bucle de distorsión cada 5 segundos */
-            animation: fadeIn 1.2s ease-out forwards, glitchLoop 5s infinite;
-            animation-delay: 1.8s, 4s;
+            /* Se funde y empieza el glitch infinito */
+            animation: fadeIn 1.2s ease-out forwards, bynacGlitch 0.6s infinite;
+            animation-delay: 0.5s, 1.7s; 
         }
 
-        /* Animación de la distorsión digital */
-        @keyframes glitch {
-            0% { transform: translate(0); clip-path: inset(0% 0% 0% 0%); }
-            10% { transform: translate(-3px, 2px); clip-path: inset(10% 0% 85% 0%); }
-            20% { transform: translate(3px, -2px); clip-path: inset(80% 0% 5% 0%); }
-            30% { transform: translate(-3px, 1px); }
-            40% { transform: translate(0); }
-        }
-
-        /* Bucle que activa el glitch brevemente y para */
-        @keyframes glitchLoop {
-            0%, 90%, 100% { transform: translate(0); filter: hue-rotate(0deg); }
-            92% { transform: translate(-4px, 2px); filter: hue-rotate(90deg); }
-            94% { transform: translate(4px, -2px); filter: hue-rotate(-90deg); }
-            96% { transform: translate(-2px, 3px); }
-        }
-
-        /* Distorsión continua al tocar el logo */
-        .brand-corner:active img {
-            animation: glitch 0.2s infinite;
-            filter: brightness(1.5) contrast(2);
+        /* ANIMACIÓN DE DISTORSIÓN (GLITCH CONSTANTE) */
+        @keyframes bynacGlitch {
+            0% { transform: translate(0); filter: hue-rotate(0deg) contrast(1); }
+            10% { transform: translate(-2px, -1px) skewX(5deg); filter: sepia(1) saturate(3) hue-rotate(90deg); }
+            20% { transform: translate(2px, 1px) skewX(-5deg); filter: hue-rotate(180deg); }
+            30% { transform: translate(-1px, 2px); }
+            40% { transform: translate(1px, -2px); filter: brightness(1.5); }
+            50% { transform: translate(-2px, 0.5px); }
+            100% { transform: translate(0); filter: hue-rotate(360deg) contrast(1); }
         }
 
         /* MÚSICA */
@@ -69,54 +57,42 @@
         }
         .music-btn:hover { background: #fff; color: #000; }
 
-        /* --- ANIMACIONES GENERALES --- */
+        /* --- PORTADA --- */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes expandLine { from { width: 0; } to { width: 60px; } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* PORTADA */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         h1 { font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; animation: fadeInDown 1.2s ease-out forwards; }
-        .line { height: 2px; background-color: #fff; margin: 20px auto; animation: expandLine 1s ease-in-out forwards; animation-delay: 0.6s; }
-        .tagline { font-size: 1.1rem; letter-spacing: 5px; color: #888; text-transform: uppercase; margin-bottom: 40px; opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1.2s; }
-        .btn-tienda { display: inline-block; padding: 18px 50px; border: 1.5px solid #ffffff; color: #ffffff; text-decoration: none; font-size: 0.9rem; border-radius: 40px; text-transform: uppercase; letter-spacing: 3px; opacity: 0; animation: fadeInUp 1.2s ease-out forwards; animation-delay: 1.8s; transition: 0.3s; }
+        .tagline { font-size: 1rem; letter-spacing: 5px; color: #666; margin-top: 10px; text-transform: uppercase; }
+
+        .btn-tienda { 
+            display: inline-block; padding: 18px 50px; border: 1.5px solid #ffffff; color: #ffffff; 
+            text-decoration: none; font-size: 0.9rem; border-radius: 40px; text-transform: uppercase; 
+            letter-spacing: 3px; margin-top: 50px; transition: 0.3s;
+            opacity: 0; animation: fadeIn 1s forwards; animation-delay: 2s;
+        }
         .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* SECCIÓN SELECCIÓN */
+        /* SECCIONES MÓVIL */
         #menu-coleccion {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background-color: #080808; border-top: 1px solid #1a1a1a; padding: 60px 0; box-sizing: border-box;
+            background-color: #080808; border-top: 1px solid #1a1a1a; padding: 60px 0;
         }
-        .titulo-menu { font-size: 1.8rem; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 50px; }
-        .grid-seleccion { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; width: 90%; }
-        .opcion-card { height: 350px; background: #111; border: 1px solid #222; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #fff; border-radius: 10px; transition: 0.4s; }
-        .opcion-card h2 { font-size: 1.5rem; letter-spacing: 5px; text-transform: uppercase; }
-        .opcion-card:hover { border-color: #fff; transform: translateY(-10px); }
-
-        /* PRODUCTOS Y ZOOM */
-        .seccion-productos { padding: 80px 20px; }
-        .producto-card { max-width: 600px; margin: 0 auto 100px auto; background: #0a0a0a; padding: 20px; border: 1px solid #1a1a1a; }
-        .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .img-container { width: 100%; height: 450px; background: #151515; overflow: hidden; cursor: zoom-in; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
-        
-        #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 2000; cursor: zoom-out; }
-        #lightbox img { max-width: 90%; max-height: 90%; border: 2px solid #333; }
+        .grid-seleccion { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 90%; max-width: 900px; }
+        .opcion-card { height: 280px; background: #111; border: 1px solid #222; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #fff; border-radius: 10px; }
+        .opcion-card h2 { font-size: 1.3rem; letter-spacing: 5px; }
 
         @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; letter-spacing: 8px; }
-            .grid-seleccion { grid-template-columns: 1fr; gap: 20px; }
-            .opcion-card { height: 200px; }
-            .brand-corner { top: 15px; left: 15px; }
+            h1 { font-size: 2.2rem; letter-spacing: 8px; }
+            .grid-seleccion { grid-template-columns: 1fr; }
             .brand-corner img { width: 45px; }
-            .header-controls { top: 15px; right: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="brand-corner" onclick="toggleMusic()">
+    <div class="brand-corner">
         <img src="Logo.jpg" alt="Logo BYNAC">
     </div>
 
@@ -124,49 +100,26 @@
         <button class="music-btn" onclick="toggleMusic()">TECHNO: ON/OFF</button>
     </div>
 
-    <audio id="bgMusic" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
-
-    <div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src=""></div>
+    <audio id="bgMusic" loop><source src="musica.mp3" type="audio/mpeg"></audio>
 
     <section class="hero">
         <h1>BYNAC</h1>
-        <div class="line"></div>
         <p class="tagline">Beyond Norms and Conformity</p>
         <a href="#menu-coleccion" class="btn-tienda">Ver Colección</a>
     </section>
 
     <section id="menu-coleccion">
-        <h2 class="titulo-menu">Selecciona categoría</h2>
+        <h2 style="letter-spacing: 8px; margin-bottom: 40px;">CATEGORÍAS</h2>
         <div class="grid-seleccion">
-            <a href="#cat-camisetas" class="opcion-card"><h2>Camisetas</h2></a>
-            <a href="#cat-sudaderas" class="opcion-card"><h2>Sudaderas</h2></a>
+            <a href="#" class="opcion-card"><h2>Camisetas</h2></a>
+            <a href="#" class="opcion-card"><h2>Sudaderas</h2></a>
         </div>
     </section>
-
-    <div class="seccion-productos">
-        <div id="cat-camisetas">
-            <div class="producto-card">
-                <div class="fotos-grid">
-                    <div class="img-container" onclick="openLightbox(this)"><img src="camiseta_gris_delante.jpg"></div>
-                    <div class="img-container" onclick="openLightbox(this)"><img src="camiseta_gris_detras.jpg"></div>
-                </div>
-                <p style="letter-spacing: 3px; font-weight: bold; text-transform: uppercase; margin-top: 20px;">Camiseta Gris Street</p>
-            </div>
-        </div>
-    </div>
 
     <script>
         function toggleMusic() {
             var audio = document.getElementById('bgMusic');
-            if (audio.paused) { audio.play().catch(e => console.log("Click necesario")); } 
-            else { audio.pause(); }
-        }
-        function openLightbox(element) {
-            var imgSrc = element.querySelector('img').src;
-            document.getElementById('lightbox-img').src = imgSrc;
-            document.getElementById('lightbox').style.display = 'flex';
+            if (audio.paused) { audio.play(); } else { audio.pause(); }
         }
     </script>
 </body>
