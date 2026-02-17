@@ -16,26 +16,29 @@
             overflow-x: hidden;
         }
 
-        /* --- LOGO POR DETRÁS (CORREGIDO) --- */
+        /* --- LOGO BLANCO PURO QUE NO ESTORBA --- */
         .brand-corner {
             position: fixed;
             top: 25px;
             left: 25px;
-            /* z-index bajo para que quede por debajo de los botones al hacer scroll */
-            z-index: 1; 
+            z-index: 1; /* Por debajo de botones */
+            /* IMPORTANTE: Permite que los clics pasen a través del logo */
+            pointer-events: none; 
         }
         
         .brand-corner img {
             width: 55px;
             height: auto;
             display: block;
-            /* Un poco de transparencia para que no tape nada */
-            opacity: 0.6; 
-            animation: fadeIn 1.2s ease-out forwards, darkGlitch 7s infinite;
+            opacity: 0; /* Empieza invisible para el fade-in */
+            filter: brightness(1); /* Blanco total */
+            animation: fadeInFull 1.2s ease-out forwards, darkGlitch 7s infinite;
             animation-delay: 0.5s, 3s; 
         }
 
-        /* ANIMACIÓN GLITCH NEGRO (Sutil y espaciada) */
+        @keyframes fadeInFull { from { opacity: 0; } to { opacity: 1; } }
+
+        /* GLITCH NEGRO (Sutil) */
         @keyframes darkGlitch {
             0%, 90%, 94%, 98%, 100% { transform: translate(0); filter: brightness(1); clip-path: inset(0 0 0 0); }
             91% { transform: translate(-3px, 1px); filter: brightness(0); clip-path: inset(20% 0 50% 0); }
@@ -44,50 +47,38 @@
             97% { transform: translate(-2px, 0); clip-path: inset(70% 0 10% 0); }
         }
 
-        /* BOTONES Y CONTENIDOS (Z-INDEX ALTO) */
-        .header-controls { 
-            position: fixed; top: 25px; right: 25px; 
-            z-index: 2000; /* Siempre arriba */
-        }
-        
-        section, .btn-tienda, .opcion-card {
-            position: relative;
-            z-index: 10; /* Esto hace que pasen POR ENCIMA del logo */
-        }
-
+        /* CONTROLES Y BOTONES (Z-INDEX ALTO) */
+        .header-controls { position: fixed; top: 25px; right: 25px; z-index: 2000; }
         .music-btn {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
             padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.6rem;
             text-transform: uppercase; letter-spacing: 2px;
+            pointer-events: auto; /* Estos sí reciben clics */
         }
 
-        /* PORTADA */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 10; }
         h1 { font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; margin: 0; }
-        .tagline { font-size: 1rem; letter-spacing: 5px; color: #444; margin-top: 10px; text-transform: uppercase; }
-
+        
         .btn-tienda { 
             display: inline-block; padding: 18px 50px; border: 1.5px solid #ffffff; color: #ffffff; 
             text-decoration: none; font-size: 0.9rem; border-radius: 40px; text-transform: uppercase; 
-            letter-spacing: 3px; margin-top: 50px; transition: 0.3s; background: #050505;
+            letter-spacing: 3px; margin-top: 50px; transition: 0.3s; background: transparent;
+            position: relative; z-index: 20;
         }
         .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* SECCIONES MÓVIL */
         #menu-coleccion {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             background-color: #080808; border-top: 1px solid #1a1a1a; padding: 60px 0;
+            position: relative; z-index: 10;
         }
         .grid-seleccion { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 90%; max-width: 900px; }
-        .opcion-card { height: 280px; background: #111; border: 1px solid #222; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #fff; border-radius: 10px; transition: 0.4s; }
-        .opcion-card h2 { font-size: 1.3rem; letter-spacing: 5px; }
+        .opcion-card { height: 280px; background: #111; border: 1px solid #222; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #fff; border-radius: 10px; }
 
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; letter-spacing: 8px; }
-            .grid-seleccion { grid-template-columns: 1fr; }
             .brand-corner img { width: 45px; }
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 0.6; } }
     </style>
 </head>
 <body>
@@ -104,15 +95,15 @@
 
     <section class="hero">
         <h1>BYNAC</h1>
-        <p class="tagline">Beyond Norms and Conformity</p>
+        <p style="letter-spacing: 5px; color: #666;">BEYOND NORMS AND CONFORMITY</p>
         <a href="#menu-coleccion" class="btn-tienda">Ver Colección</a>
     </section>
 
     <section id="menu-coleccion">
         <h2 style="letter-spacing: 8px; margin-bottom: 40px;">CATEGORÍAS</h2>
         <div class="grid-seleccion">
-            <a href="#cat-camisetas" class="opcion-card"><h2>Camisetas</h2></a>
-            <a href="#cat-sudaderas" class="opcion-card"><h2>Sudaderas</h2></a>
+            <a href="#" class="opcion-card"><h2>Camisetas</h2></a>
+            <a href="#" class="opcion-card"><h2>Sudaderas</h2></a>
         </div>
     </section>
 
