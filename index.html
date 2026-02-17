@@ -16,25 +16,22 @@
             overflow-x: hidden;
         }
 
-        /* --- LOGO FIJO SIN INTERFERENCIAS --- */
+        /* --- LOGO FIJO SIEMPRE VISIBLE --- */
         .brand-corner {
             position: fixed;
             top: 20px;
             left: 20px;
             z-index: 9999; 
-            pointer-events: none; /* Los clics pasan a través si algo queda debajo */
+            pointer-events: none;
         }
-        
         .brand-corner img {
-            width: 50px; /* Tamaño optimizado para móvil */
+            width: 45px;
             height: auto;
-            display: block;
             filter: brightness(1);
             animation: fadeIn 1.2s ease-out forwards, darkGlitch 7s infinite;
             animation-delay: 0.5s, 3s; 
         }
 
-        /* GLITCH NEGRO SUTIL (Cada 7 seg) */
         @keyframes darkGlitch {
             0%, 90%, 94%, 98%, 100% { transform: translate(0); filter: brightness(1); clip-path: inset(0 0 0 0); }
             91% { transform: translate(-3px, 1px); filter: brightness(0); clip-path: inset(20% 0 50% 0); }
@@ -43,7 +40,7 @@
             97% { transform: translate(-2px, 0); clip-path: inset(70% 0 10% 0); }
         }
 
-        /* CONTROLES MÚSICA */
+        /* MÚSICA */
         .header-controls { position: fixed; top: 20px; right: 20px; z-index: 10000; }
         .music-btn {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
@@ -51,63 +48,60 @@
             text-transform: uppercase; letter-spacing: 2px;
         }
 
-        /* PORTADA (HERO) */
-        .hero { 
-            height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center;
-            padding: 0 20px;
-            box-sizing: border-box;
-        }
-        h1 { font-size: 3.5rem; letter-spacing: 12px; text-transform: uppercase; margin: 0; }
-        .tagline { font-size: 0.9rem; letter-spacing: 4px; color: #666; margin-top: 15px; }
-
+        /* PORTADA */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        h1 { font-size: 3rem; letter-spacing: 12px; text-transform: uppercase; margin: 0; }
         .btn-tienda { 
-            display: inline-block; 
-            padding: 15px 40px; 
-            border: 1.5px solid #ffffff; 
-            color: #ffffff; 
-            text-decoration: none; 
-            font-size: 0.8rem; 
-            border-radius: 40px; 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
-            margin-top: 40px; 
-            transition: 0.3s;
-            background: #050505; /* Fondo sólido para que no se transparente el logo debajo */
+            display: inline-block; padding: 15px 40px; border: 1.5px solid #ffffff; color: #ffffff; 
+            text-decoration: none; font-size: 0.8rem; border-radius: 40px; text-transform: uppercase; 
+            letter-spacing: 3px; margin-top: 40px; transition: 0.3s;
         }
-        .btn-tienda:hover { background: #fff; color: #000; }
 
-        /* CATEGORÍAS */
+        /* --- SECCIÓN CATEGORÍAS CORREGIDA --- */
         #menu-coleccion {
-            min-height: 100vh; 
+            padding: 100px 0;
+            background-color: #050505;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .titulo-seccion { 
+            letter-spacing: 10px; 
+            margin-bottom: 60px; 
+            text-transform: uppercase; 
+            font-size: 1.8rem;
+            width: 100%;
+        }
+        .grid-seleccion { 
             display: flex; 
             flex-direction: column; 
-            justify-content: center; 
-            align-items: center;
-            background-color: #080808; 
-            border-top: 1px solid #1a1a1a; 
-            padding: 80px 0;
+            gap: 25px; 
+            width: 85%; 
+            max-width: 450px; 
         }
-        .titulo-seccion { letter-spacing: 8px; margin-bottom: 40px; text-transform: uppercase; font-size: 1.5rem; }
-        .grid-seleccion { display: flex; flex-direction: column; gap: 20px; width: 90%; max-width: 400px; }
         .opcion-card { 
-            height: 200px; 
-            background: #111; 
-            border: 1px solid #222; 
+            height: 220px; /* Altura fija para evitar cortes */
+            background: #0d0d0d; 
+            border: 1px solid #1a1a1a; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             text-decoration: none; 
             color: #fff; 
-            border-radius: 10px;
+            border-radius: 12px;
             transition: 0.3s;
+            overflow: hidden;
         }
-        .opcion-card:hover { border-color: #fff; }
+        .opcion-card h2 { 
+            font-size: 1.5rem; 
+            letter-spacing: 6px; 
+            text-transform: uppercase;
+            margin: 0;
+            line-height: 1; /* Evita que el texto se corte por arriba/abajo */
+        }
+        .opcion-card:hover { border-color: #fff; background: #111; }
 
-        /* SECCIÓN PRODUCTOS */
+        /* PRODUCTOS */
         .seccion-productos { padding: 60px 20px; }
         .producto-card { max-width: 600px; margin: 0 auto 80px auto; background: #0a0a0a; padding: 15px; border: 1px solid #1a1a1a; }
         .fotos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -115,8 +109,9 @@
         .img-container img { width: 100%; height: 100%; object-fit: cover; }
 
         @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; letter-spacing: 6px; }
-            .brand-corner img { width: 42px; }
+            h1 { font-size: 2.2rem; }
+            .opcion-card { height: 180px; } /* Un poco más pequeñas en móvil */
+            .opcion-card h2 { font-size: 1.2rem; }
         }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -135,15 +130,19 @@
 
     <section class="hero">
         <h1>BYNAC</h1>
-        <p class="tagline">BEYOND NORMS AND CONFORMITY</p>
+        <p style="letter-spacing: 5px; color: #666; margin-top: 10px;">BEYOND NORMS AND CONFORMITY</p>
         <a href="#menu-coleccion" class="btn-tienda">VER COLECCIÓN</a>
     </section>
 
     <section id="menu-coleccion">
         <h2 class="titulo-seccion">CATEGORÍAS</h2>
         <div class="grid-seleccion">
-            <a href="#cat-camisetas" class="opcion-card"><h2>CAMISETAS</h2></a>
-            <a href="#cat-sudaderas" class="opcion-card"><h2>SUDADERAS</h2></a>
+            <a href="#cat-camisetas" class="opcion-card">
+                <h2>CAMISETAS</h2>
+            </a>
+            <a href="#cat-sudaderas" class="opcion-card">
+                <h2>SUDADERAS</h2>
+            </a>
         </div>
     </section>
 
